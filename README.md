@@ -2,16 +2,17 @@
 RahmanyCourses API is a robust and scalable web service built with a focus on clean architecture and design patterns, providing a comprehensive solution for managing a dynamic online courses platform. Leveraging the principles of 4-layer clean architecture, repository pattern, unit of work, CQRS, and MediatR, this API is designed for flexibility, maintainability, and extensibility.
 
 ### Key Features
-- Clean Architecture: The project follows a 4-layer clean architecture, separating concerns to enhance modularity and maintainability.
+- ##### Clean Architecture: The project follows a 4-layer clean architecture, separating concerns to enhance modularity and maintainability.
 
-- Repository Pattern: Utilizing the repository pattern ensures a clear separation between data access logic and business logic, promoting a scalable and testable codebase.
+- ##### Repository Pattern: Utilizing the repository pattern ensures a clear separation between data access logic and business logic, promoting a scalable and testable codebase.
 
-- Unit of Work: The unit of work pattern facilitates the management of transactions, providing a cohesive mechanism for coordinating multiple data operations.
-- CQRS (Command Query Responsibility Segregation): Adopting CQRS enables a clear distinction between command (write) and query (read) operations, optimizing the system for specific use cases.
+- ##### Unit of Work: The unit of work pattern facilitates the management of transactions, providing a cohesive mechanism for coordinating multiple data operations.
+- ##### CQRS (Command Query Responsibility Segregation): Adopting CQRS enables a clear distinction between command (write) and query (read) operations, optimizing the system for specific use cases.
 
-- MediatR Design Patterns: The MediatR library is employed to implement the mediator pattern, simplifying the communication between different components of the application.
+- ##### MediatR Design Patterns: The MediatR library is employed to implement the mediator pattern, simplifying the communication between different components of the application.
 
-- AutoMapper: AutoMapper is utilized for seamless object-to-object mapping, streamlining data transformations and reducing boilerplate code.
+- ##### AutoMapper: AutoMapper is utilized for seamless object-to-object mapping, streamlining data transformations and reducing boilerplate code.
+- ##### Custom Authentication: The API incorporates a custom authentication mechanism, ensuring secure user authentication. Passwords are securely hashed and stored with their respective salts in the database. Token creation is seamlessly managed, providing a secure and efficient authentication process.
 
 ### Usage
 RahmanyCourses API empowers both instructors and students to seamlessly interact with the platform. Instructors can create accounts and courses, while students can enroll in these courses, fostering a collaborative and engaging learning environment.
