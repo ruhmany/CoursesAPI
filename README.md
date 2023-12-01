@@ -17,19 +17,19 @@ RahmanyCourses API is a robust and scalable web service built with a focus on cl
 RahmanyCourses API empowers both instructors and students to seamlessly interact with the platform. Instructors can create accounts and courses, while students can enroll in these courses, fostering a collaborative and engaging learning environment.
 
 ### Getting Started
-1- Clone the repository.
-2- Configure the database connection in the appsettings.json file.
-3- Run the database migrations.
-4- Launch the API.
-5- Detailed documentation regarding API endpoints, request/response formats, and authentication can be found in the full documentation.
+1. Clone the repository.
+2. Configure the database connection in the appsettings.json file.
+3. Run the database migrations.
+4. Launch the API.
+5. Detailed documentation regarding API endpoints, request/response formats, and authentication can be found in the full documentation.
 
 ### Contributing
 Contributions to RahmanyCourses API are welcome! Follow these steps to contribute:
-1- Fork the repository.
-2- Create a new branch.
-3- Make your changes.
-4- Submit a pull request.
-5- For further assistance or inquiries, feel free to contact us at [elngareng12345@example.com].
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Submit a pull request.
+5. For further assistance or inquiries, feel free to contact us at [elngareng12345@example.com].
 
 ### License
 - This project is licensed under the Your License Name.
