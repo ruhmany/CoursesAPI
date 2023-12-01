@@ -32,4 +32,4 @@ Contributions to RahmanyCourses API are welcome! Follow these steps to contribut
 5. For further assistance or inquiries, feel free to contact us at [elngareng12345@example.com].
 
 ### License
-- This project is licensed under the Your License Name.
+- This project is licensed under NinjaLicense.
