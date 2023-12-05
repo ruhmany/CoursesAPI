@@ -36,9 +36,12 @@ namespace Application.Handlers.InstructorHandlers.CommandHandlers
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserType = UserType.Instructor,
+                Token = ""
             };
-            instructor.Token = _authService.CreateToken(instructor);
+
             await _repository.AddInstructor(instructor);
+            _unitOfWork.CommitChanges();            
+            instructor.Token = _authService.CreateToken(instructor);
             _unitOfWork.CommitChanges();
             return instructor;
         }

@@ -35,8 +35,11 @@ namespace Application.Handlers.StudentHandlers.CommandsHandlers
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserType = UserType.Student,
+                Token = ""
             };
+            
             await _studentRepository.AddStudent(student);
+            _unitOfWork.CommitChanges();
             student.Token = _authService.CreateToken(student);
             _unitOfWork.CommitChanges();
             return student;
