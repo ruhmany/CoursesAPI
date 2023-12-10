@@ -14,5 +14,6 @@ namespace Core.Interfaces.Services
         bool VerifyPasswordHash(string password, byte[] passwordhash, byte[] passwordsalt);
 
         string CreateToken(User user);
+        RefreshToken CreateRefreshToken();
     }
 }

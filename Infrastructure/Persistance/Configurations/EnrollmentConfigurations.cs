@@ -14,8 +14,10 @@ namespace Infrastructure.Persistance.Configurations
         public void Configure(EntityTypeBuilder<Enrollment> builder)
         {
             builder.HasKey(e => e.ID);
+
             builder.Property(e => e.ID).ValueGeneratedOnAdd();
-            builder.HasOne(e => e.Student).WithMany(s=> s.Enrollments).HasForeignKey(e => e.StudentID);
+
+            builder.HasOne(e => e.User).WithMany(u => u.Enrollments).HasForeignKey(e => e.UserID);
             builder.HasOne(e => e.Course).WithMany(c => c.Enrollments).HasForeignKey(e => e.CourseID);
         }
     }

@@ -9,6 +9,7 @@ namespace Core.Enums
     public enum UserType
     {
         Student,
-        Instructor
+        Instructor,
+        Admin
     }
 }

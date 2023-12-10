@@ -27,6 +27,18 @@ namespace Infrastructure.Persistance.Services
             }
         }
 
+        public RefreshToken CreateRefreshToken()
+        {
+            var random = new byte[32];
+            using var generator = new RNGCryptoServiceProvider();
+            return new RefreshToken
+            {
+                Token = Convert.ToBase64String(random),
+                ExpiredOn = DateTime.UtcNow.AddDays(10),
+                CreatedOn = DateTime.UtcNow
+            };
+        }
+
         public string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>

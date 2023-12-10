@@ -1,7 +1,4 @@
-﻿using Application.Commands.CourseCommands;
-using Application.Commands.EnrollmentCommands;
-using Application.Commands.InstructorCommands;
-using Application.Commands.StudentCommands;
+﻿using Application.Commands.UserCommands;
 using AutoMapper;
 using Core.Entities;
 using System;
@@ -16,14 +13,7 @@ namespace Application.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<AddCourseCommand, Course>();
-            CreateMap<UpdateCourseCommand, Course>();
-            CreateMap<AddEnrollmentCommand, Enrollment>();
-            CreateMap<UpdateEnrollmentCommand, Enrollment>();
-            CreateMap<AddInstructorCommand, Instructor>();
-            CreateMap<UpdateInstructorCommand, Instructor>();
-            CreateMap<AddStudentCommand, Student>();
-            CreateMap<UpdateStudentCommand, Student>();
+            CreateMap<AddUserCommand, User>();            
         }
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Enrollment
-    {
-        public int ID { get; set; }
-        public DateTime EnrollAt { get; set; }
-        public int StudentID { get; set; }
+    public class Enrollment : BaseEntity
+    {        
+        public int UserID { get; set; }
         public int CourseID { get; set; }
+        public DateTime EnrollmentDate { get; set; }
 
-        public virtual Student Student { get; set; }
+        // Navigation properties
+        public virtual User User { get; set; }
         public virtual Course Course { get; set; }
     }
 }

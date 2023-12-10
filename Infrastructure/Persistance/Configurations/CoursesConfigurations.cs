@@ -14,8 +14,19 @@ namespace Infrastructure.Persistance.Configurations
         public void Configure(EntityTypeBuilder<Course> builder)
         {
             builder.HasKey(c => c.ID);
+
             builder.Property(c => c.ID).ValueGeneratedOnAdd();
-            builder.HasOne(c => c.Instructor).WithMany(i => i.Courses).HasForeignKey(c => c.InstructorID);
+            builder.Property(c => c.Title).HasMaxLength(120);
+            builder.Property(c => c.Description);
+            builder.Property(c => c.InstructorID);
+            builder.Property(c => c.CategoryID);
+            builder.Property(c => c.Price);
+            builder.Property(c => c.CreationDate);
+
+            builder.HasOne(c => c.Category).WithMany(cc => cc.Courses).HasForeignKey(c => c.CategoryID);
+            builder.HasOne(c => c.Instructor).WithMany(u => u.Courses).HasForeignKey(c => c.InstructorID).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(c => c.Enrollments).WithOne(e => e.Course).HasForeignKey(e => e.CourseID);
+            builder.HasMany(c => c.Contents).WithOne(co => co.Course).HasForeignKey(co => co.CourseID);
         }
     }
 }

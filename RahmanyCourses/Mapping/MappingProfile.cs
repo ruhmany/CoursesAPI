@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Entities;
 using RahmanyCourses.Models;
+using RahmanyCourses.Response;
 
 namespace RahmanyCourses.Mapping
 {
@@ -8,10 +9,7 @@ namespace RahmanyCourses.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Instructor, InstructorDTO>();
-            CreateMap<InstructorDTO, Instructor>();
-            CreateMap<CourseDTO, Course>();
-            CreateMap<Course, CourseDTO>();
+            CreateMap<User, UserResponse>();
         }
     }
 }
