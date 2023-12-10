@@ -12,7 +12,7 @@ namespace Core.Interfaces.Repositories
         Task<T> GetById(int id);
         Task<List<T>> GetAll();
         Task Add(T entity);
-        void UpdateCourse(T entity);
-        void DeleteCourse(T entity);
+        void Update(T entity);
+        void Delete(T entity);
     }
 }

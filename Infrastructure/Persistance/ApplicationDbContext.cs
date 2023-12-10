@@ -52,5 +52,19 @@ namespace Infrastructure.Persistance
             base.OnModelCreating(modelBuilder);
         }
 
+        public override int SaveChanges()
+        {
+            foreach(var entry in ChangeTracker.Entries())
+            {
+                var entity = entry.Entity;
+                if(entry.State == EntityState.Deleted)
+                {
+                    entry.State = EntityState.Modified;
+                    entry.GetType().GetProperty("IsDeleted").SetValue(entity, true);
+                }
+            }
+            return base.SaveChanges();
+        }
+
     }
 }

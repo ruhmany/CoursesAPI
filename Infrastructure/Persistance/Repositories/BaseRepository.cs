@@ -21,14 +21,14 @@ namespace Infrastructure.Persistance.Repositories
             await _context.Set<T>().AddAsync(entity);
         }
 
-        public void DeleteCourse(T entity)
+        public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
         }
 
         public async Task<List<T>> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await _context.Set<T>().AsQueryable().Where(t => !t.IsDeleted).ToListAsync();
         }
 
         public async Task<T> GetById(int id)
@@ -36,7 +36,7 @@ namespace Infrastructure.Persistance.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public void UpdateCourse(T entity)
+        public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
         }

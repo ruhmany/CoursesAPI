@@ -15,9 +15,4 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="QueryHandlers\" />
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>
