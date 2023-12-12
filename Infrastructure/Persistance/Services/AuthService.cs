@@ -33,7 +33,7 @@ namespace Infrastructure.Persistance.Services
             using var generator = new RNGCryptoServiceProvider();
             return new RefreshToken
             {
-                Token = Convert.ToBase64String(random),
+                Token = Convert.ToBase64String(generator),
                 ExpiredOn = DateTime.UtcNow.AddDays(10),
                 CreatedOn = DateTime.UtcNow
             };
@@ -65,7 +65,7 @@ namespace Infrastructure.Persistance.Services
             using(var hmac = new HMACSHA512(passwordsalt))
             {
                 var computedhash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return computedhash == passwordhash;
+                return computedhash.AsSpan().SequenceEqual(passwordhash);
             }
         }
     }

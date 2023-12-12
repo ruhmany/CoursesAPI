@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Application.Models;
+using Core.Entities;
 using Core.Enums;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.UserCommands
 {
-    public class AddUserCommand : IRequest<User>
+    public class AddUserCommand : IRequest<AuthModel>
     {
         public string Username { get; set; }
         public string Password { get; set; }

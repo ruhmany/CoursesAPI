@@ -1,9 +1,8 @@
 ﻿using Application.Commands.UserCommands;
+using Application.Queries.UserQueries;
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RahmanyCourses.Response;
 
 namespace RahmanyCourses.Controllers
 {
@@ -12,20 +11,32 @@ namespace RahmanyCourses.Controllers
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
         public UserController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(AddUserCommand command)
         {
-            var user = await _mediator.Send(command);
-            var result = _mapper.Map<UserResponse>(user);
-            return Ok(result);
+            var userResponse = await _mediator.Send(command);
+            if(userResponse == null)
+            {
+                return BadRequest();
+            }
+            return Ok(userResponse);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(GetUserTokenQuery query)
+        {
+            var userResponse = await _mediator.Send(query);
+            if(userResponse == null)
+            {
+                return BadRequest();
+            }
+            return Ok(userResponse);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Application.CommandHandlers.UserCommandsHandlers
         }
         public async Task<User> Handle(UpdateUserEmailCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetByEmail(request.OldEmail);
+            var user = await _userRepository.GetUserByUsername(request.OldEmail);
             if(user != null)
             {
                 user.Email = request.Email;
