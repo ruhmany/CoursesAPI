@@ -27,5 +27,9 @@ namespace Core.Entities
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Progress> Progresses { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<UsedCoupons> UsedCoupons { get; set; }
+        public virtual ICollection<RateReport> RateReports { get; set; }
+        public virtual ICollection<ContentReport> ContentReports { get; set; }
+
     }
 }

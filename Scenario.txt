@@ -1,0 +1,14 @@
+This System Has 3 Types Of Users
+--------------------------------
+--------------------------------
+1- Student
+A Student Can (Register - Login - UpdateProfile - SearchForCourse - SearchForInstructor
+		 - EnrollInCourse - RateEnrolledCourses - PayFees - ApplyCoupons)
+2- Instructor
+An Instructor Can (Register - Login - UpdateProfile - SearchForCourse - SearchForInstructor
+		 - EnrollInCourse (OtherInstructors) - CreateCourse - RateEnrolledCourses - 
+		PayFees - ApplyCoupons - CreateCoupons)
+3- Admin
+An Admin Can (Register - Login - ConfirmInstructorAccount - RemoveReportedContent - BanReportedUsers)
+
+-------------------------------

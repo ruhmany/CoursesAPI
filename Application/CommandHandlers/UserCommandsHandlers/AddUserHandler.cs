@@ -42,9 +42,8 @@ namespace Application.CommandHandlers.UserCommandsHandlers
             var User = _mapper.Map<User>(request);
             User.PasswordHash = PasswordHash;
             User.PasswordSalt = PasswordSalt;
-            User.UserType = request.UserType;
             User.Token = "";
-            User.RegistrationDate = DateTime.Now;
+            User.RegistrationDate = DateTime.Now.ToLocalTime();
             var refreshtoken = _authService.CreateRefreshToken();
             User.RefreshTokens = new List<RefreshToken>
             {
@@ -53,15 +52,12 @@ namespace Application.CommandHandlers.UserCommandsHandlers
             await _userRepository.Add(User);
             _unitOfWork.CommitChanges();
             User.Token = _authService.CreateToken(User);
+            _userRepository.Update(User);
             _unitOfWork.CommitChanges();
-            var authModel = new AuthModel
-            {
-                Username = User.Username,
-                UserType = User.UserType,
-                Token = User.Token,
-                RefreshToken = refreshtoken.Token,
-                RefreshTokenExpiration = refreshtoken.ExpiredOn
-            };
+            var authModel = _mapper.Map<AuthModel>(User);
+
+            authModel.RefreshToken = refreshtoken.Token;
+            authModel.RefreshTokenExpiration = refreshtoken.ExpiredOn;
             return authModel;
         }
     }

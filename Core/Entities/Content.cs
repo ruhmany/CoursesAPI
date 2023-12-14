@@ -17,5 +17,6 @@ namespace Core.Entities
 
         // Navigation property
         public virtual Course Course { get; set; }
+        public virtual ICollection<ContentReport> ContentReports { get; set; }
     }
 }

@@ -1,4 +1,8 @@
-﻿using Application.Commands.UserCommands;
+﻿using Application.Commands.CourseCategoryCommands;
+using Application.Commands.CourseCommands;
+using Application.Commands.UserCommands;
+using Application.Commands.UserProfileCommands;
+using Application.Models;
 using AutoMapper;
 using Core.Entities;
 using System;
@@ -13,7 +17,11 @@ namespace Application.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<AddUserCommand, User>();            
+            CreateMap<AddUserCommand, User>();
+            CreateMap<User, AuthModel>();
+            CreateMap<AddUserProfileCommand, UserProfile>();
+            CreateMap<AddCourseCommand, Course>();
+            CreateMap<AddCourseCategoryCommand, CourseCategory>();
         }
     }
 }

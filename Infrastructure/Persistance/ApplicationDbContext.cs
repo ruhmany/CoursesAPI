@@ -30,6 +30,10 @@ namespace Infrastructure.Persistance
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<UsedCoupons> UsedCoupons { get; set; }
+        public DbSet<RateReport> RateReports { get; set; }
+        public DbSet<ContentReport> ContentReports { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,6 +53,10 @@ namespace Infrastructure.Persistance
             modelBuilder.ApplyConfiguration<RefreshToken>(new RefreshTokenConfigurations());
             modelBuilder.ApplyConfiguration<User>(new UserConfigurations());
             modelBuilder.ApplyConfiguration<UserProfile>(new UserProfileConfigurations());
+            modelBuilder.ApplyConfiguration<Coupon>(new CouponConfigurations());
+            modelBuilder.ApplyConfiguration<UsedCoupons>(new  UsedCouponsConfigurations());
+            modelBuilder.ApplyConfiguration<ContentReport>(new ContentReportConfigurations());
+            modelBuilder.ApplyConfiguration<RateReport>(new RateReportConfigurations());
             base.OnModelCreating(modelBuilder);
         }
 

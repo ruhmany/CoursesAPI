@@ -26,6 +26,7 @@ namespace Core.Entities
         public virtual ICollection<Discussion> Discussions { get; set; }
         public virtual ICollection<Progress> Progresses { get; set; }
         public virtual ICollection<Quiz> Quizzes { get; set; }
+        public virtual ICollection<Coupon> Coupons { get; set; }
 
     }
 }

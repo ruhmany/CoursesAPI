@@ -13,6 +13,7 @@ namespace Core.Entities
         public string LastName { get; set; }
         public string ProfilePicture { get; set; }
         public string Bio { get; set; }
+        public bool IsBanned { get; set; }
 
         // Navigation property
         public virtual User User { get; set; }
