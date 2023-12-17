@@ -1,4 +1,5 @@
 ﻿using Application.Commands.UserProfileCommands;
+using Application.Models;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces.Repositories;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Application.CommandHandlers.UserProfileCommandsHandlers
 {
-    public class UserProfileCommandsHandlers : IRequestHandler<AddUserProfileCommand, UserProfile>
+    public class UserProfileCommandsHandlers : IRequestHandler<AddUserProfileCommand, UserProfileReturnModel>
     {
         private readonly IUserRepository _repository;
         private readonly IPhotoService _photoService;
@@ -27,7 +28,7 @@ namespace Application.CommandHandlers.UserProfileCommandsHandlers
             _mapper = mapper;
         }
 
-        public async Task<UserProfile> Handle(AddUserProfileCommand request, CancellationToken cancellationToken)
+        public async Task<UserProfileReturnModel> Handle(AddUserProfileCommand request, CancellationToken cancellationToken)
         {
             var user = await _repository.GetById(request.UserID);
             if (user == null)
@@ -40,7 +41,13 @@ namespace Application.CommandHandlers.UserProfileCommandsHandlers
             user.UserProfile = profile;
             _repository.Update(user);
             _unitOfWork.CommitChanges();
-            throw new NotImplementedException();
+            return new UserProfileReturnModel
+            {
+                FirstName = profile.FirstName,
+                LastName = profile.LastName,
+                ProfilePicture = profile.ProfilePicture,
+                Bio = profile.Bio
+            };
         }
     }
 }

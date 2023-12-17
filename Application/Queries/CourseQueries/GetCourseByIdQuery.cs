@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.UserCommands
+namespace Application.Queries.CourseQueries
 {
-    public class DeleteUserCommand : IRequest<UserReturnModel>
+    public class GetCourseByIdQuery : IRequest<CourseReturnModel>
     {
         public int Id { get; set; }
     }

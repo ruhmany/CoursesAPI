@@ -1,11 +1,6 @@
 ﻿using Core.Entities;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
 {
@@ -21,6 +16,15 @@ namespace Infrastructure.Persistance.Repositories
         {
             return await _context.Users.AsQueryable().Where(u => u.Email == email).FirstOrDefaultAsync();
         }
+
+        public async Task<IEnumerable<Course>> GetEnrolledInCourses(int userId)
+        {
+            var courses = await _context.Users.Where(user => user.ID == userId)
+                .SelectMany(user => user.Enrollments)
+                .Select(enrollment => enrollment.Course).ToListAsync();
+            return courses;
+        }
+
         public async Task<User> GetUserByUsername(string username)
         {
             return await _context.Users.AsQueryable().Where(u => u.Username == username).FirstOrDefaultAsync();

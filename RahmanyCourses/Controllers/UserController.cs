@@ -1,15 +1,10 @@
 ﻿using Application.Commands.UserCommands;
 using Application.Queries.UserQueries;
 using AutoMapper;
-using Core.Interfaces.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using RahmanyCourses.Models;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace RahmanyCourses.Controllers
 {
@@ -29,7 +24,7 @@ namespace RahmanyCourses.Controllers
 
 
         [HttpGet("get-all-users")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -41,7 +36,7 @@ namespace RahmanyCourses.Controllers
         }
 
         [HttpGet("get-user-by-username")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -53,53 +48,13 @@ namespace RahmanyCourses.Controllers
             return Ok(result);
         }
 
-
-        [HttpPost("register")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register(AddUserCommand command)
+        [HttpGet("get-my-courses")]
+        [Authorize]
+        public async Task<IActionResult> GetCoursesByUserID()
         {
-            var userResponse = await _mediator.Send(command);
-            if(userResponse == null)
-            {
-                return BadRequest();
-            }
-            return Ok(userResponse);
-        }
-
-        [HttpPost("login")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Login(GetUserTokenCommand query)
-        {
-            var userResponse = await _mediator.Send(query);
-            if(userResponse == null)
-            {
-                return BadRequest();
-            }
-            return Ok(userResponse);
-        }
-
-        [HttpPost("Refresh")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Refresh([FromBody] RefreshTokensModel model)
-        {
-            var princible = GetClaimsPrincipalFromExpiredToken(model.Token);
-            if (princible?.Identity?.Name is null)
-                return Unauthorized();
-            var request = new CreateNewTokensCommand 
-            {
-                Username = princible.Identity.Name,
-                Token = model.Token,
-                RefreshToken = model.RefreshToken
-            };
-            var result = await _mediator.Send(request);      
-            if (result == null)
-                return Unauthorized();
+            var userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var request = new GetCoursesQuery { UserId = userid };
+            var result = await _mediator.Send(request);
             return Ok(result);
         }
 
@@ -131,16 +86,6 @@ namespace RahmanyCourses.Controllers
         }
 
 
-        private ClaimsPrincipal? GetClaimsPrincipalFromExpiredToken(string? token)
-        {
-            var validation = new TokenValidationParameters
-            {
-                ValidIssuer = _configuration["JWT:Issuer"],
-                ValidAudience = _configuration["JWT:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"])),
-                ValidateLifetime = false
-            };
-            return new JwtSecurityTokenHandler().ValidateToken(token, validation, out _);
-        }
+        
     }
 }

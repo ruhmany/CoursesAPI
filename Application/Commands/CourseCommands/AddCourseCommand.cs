@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Application.Models;
+using Core.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.CourseCommands
 {
-    public class AddCourseCommand : IRequest<Course>
+    public class AddCourseCommand : IRequest<CourseReturnModel>
     {
         public string Description { get; set; }
         public string Title { get; set; }

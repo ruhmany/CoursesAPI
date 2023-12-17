@@ -174,6 +174,52 @@ namespace Infrastructure.Migrations
                     b.HasIndex("InstructorID");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryID = 1,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1871),
+                            Description = "Taking your from zero level to the dargon level in php within two weeks",
+                            InstructorID = 5,
+                            IsDeleted = false,
+                            Price = 1250m,
+                            Title = "PHP Fundamentals"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryID = 1,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1879),
+                            Description = "Taking your from zero level to the dargon level in C# within two weeks",
+                            InstructorID = 6,
+                            IsDeleted = false,
+                            Price = 2500m,
+                            Title = "C# Fundamentals"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CategoryID = 2,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1881),
+                            Description = "Taking your from zero level to the dargon level in php within two weeks",
+                            InstructorID = 6,
+                            IsDeleted = false,
+                            Price = 1500m,
+                            Title = "SQL Fundamentals"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            CategoryID = 3,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1884),
+                            Description = "Taking your from zero level to the dargon level in full-stack web development using php within two weeks",
+                            InstructorID = 5,
+                            IsDeleted = false,
+                            Price = 1200m,
+                            Title = "Full-Stack Web Development Using PHO"
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.CourseCategory", b =>
@@ -195,6 +241,32 @@ namespace Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("courseCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryName = "Programming",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryName = "Database",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CategoryName = "Software Engnireeing",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            ID = 4,
+                            CategoryName = "Project Managment",
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.Discussion", b =>
@@ -232,11 +304,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.Enrollment", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
@@ -244,19 +313,61 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
+                    b.HasKey("UserID", "CourseID");
 
                     b.HasIndex("CourseID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("Enrollments");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            CourseID = 1,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 1,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            CourseID = 3,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            CourseID = 2,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            CourseID = 3,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 4,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 4,
+                            CourseID = 2,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.Notification", b =>

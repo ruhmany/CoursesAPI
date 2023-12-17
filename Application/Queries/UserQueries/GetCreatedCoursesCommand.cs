@@ -1,5 +1,4 @@
 ﻿using Application.Models;
-using Core.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.UserCommands
+namespace Application.Queries.UserQueries
 {
-    public class DeleteUserCommand : IRequest<UserReturnModel>
+    public class GetCreatedCoursesCommand : IRequest<IEnumerable<CourseReturnModel>>
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
     }
 }

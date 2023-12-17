@@ -17,7 +17,8 @@ namespace Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,7 +37,8 @@ namespace Infrastructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserType = table.Column<int>(type: "int", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +56,8 @@ namespace Infrastructure.Migrations
                     InstructorID = table.Column<int>(type: "int", nullable: false),
                     CategoryID = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,7 +84,8 @@ namespace Infrastructure.Migrations
                     UserID = table.Column<int>(type: "int", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRead = table.Column<bool>(type: "bit", nullable: false)
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,6 +99,29 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RefreshTokens",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExpiredOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RevokeOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UserID = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefreshTokens", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_RefreshTokens_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserProfiles",
                 columns: table => new
                 {
@@ -104,7 +131,9 @@ namespace Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ProfilePicture = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Bio = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false)
+                    Bio = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
+                    IsBanned = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,13 +156,36 @@ namespace Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     URL = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderInCourse = table.Column<int>(type: "int", nullable: false)
+                    OrderInCourse = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contents", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Contents_Courses_CourseID",
+                        column: x => x.CourseID,
+                        principalTable: "Courses",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Coupons",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DiscountPercentage = table.Column<float>(type: "real", nullable: false),
+                    CourseID = table.Column<int>(type: "int", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coupons", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Coupons_Courses_CourseID",
                         column: x => x.CourseID,
                         principalTable: "Courses",
                         principalColumn: "ID",
@@ -149,7 +201,8 @@ namespace Infrastructure.Migrations
                     CourseID = table.Column<int>(type: "int", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     PostDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -172,15 +225,13 @@ namespace Infrastructure.Migrations
                 name: "Enrollments",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     CourseID = table.Column<int>(type: "int", nullable: false),
                     EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Enrollments", x => x.ID);
+                    table.PrimaryKey("PK_Enrollments", x => new { x.UserID, x.CourseID });
                     table.ForeignKey(
                         name: "FK_Enrollments_Courses_CourseID",
                         column: x => x.CourseID,
@@ -204,7 +255,8 @@ namespace Infrastructure.Migrations
                     UserID = table.Column<int>(type: "int", nullable: false),
                     CourseID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,7 +284,8 @@ namespace Infrastructure.Migrations
                     UserID = table.Column<int>(type: "int", nullable: false),
                     CourseID = table.Column<int>(type: "int", nullable: false),
                     CompletedPercentage = table.Column<int>(type: "int", nullable: false),
-                    LastAccessedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    LastAccessedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -259,7 +312,8 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseID = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -280,7 +334,9 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     CourseID = table.Column<int>(type: "int", nullable: false),
-                    RatingValue = table.Column<int>(type: "int", nullable: false)
+                    RatingValue = table.Column<float>(type: "real", nullable: false),
+                    RateMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -300,13 +356,63 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ContentReports",
+                columns: table => new
+                {
+                    ContentID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    ReportMessage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContentReports", x => new { x.ContentID, x.UserID });
+                    table.ForeignKey(
+                        name: "FK_ContentReports_Contents_ContentID",
+                        column: x => x.ContentID,
+                        principalTable: "Contents",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ContentReports_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsedCoupons",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    CouponID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsedCoupons", x => new { x.UserID, x.CouponID });
+                    table.ForeignKey(
+                        name: "FK_UsedCoupons_Coupons_CouponID",
+                        column: x => x.CouponID,
+                        principalTable: "Coupons",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsedCoupons_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuizID = table.Column<int>(type: "int", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -320,6 +426,31 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RateReports",
+                columns: table => new
+                {
+                    ReportedRateID = table.Column<int>(type: "int", nullable: false),
+                    ReporterUserID = table.Column<int>(type: "int", nullable: false),
+                    ReportMessage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RateReports", x => new { x.ReporterUserID, x.ReportedRateID });
+                    table.ForeignKey(
+                        name: "FK_RateReports_Ratings_ReportedRateID",
+                        column: x => x.ReportedRateID,
+                        principalTable: "Ratings",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RateReports_Users_ReporterUserID",
+                        column: x => x.ReporterUserID,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Answers",
                 columns: table => new
                 {
@@ -327,7 +458,8 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionID = table.Column<int>(type: "int", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsCorrect = table.Column<bool>(type: "bit", nullable: false)
+                    IsCorrect = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -346,8 +478,18 @@ namespace Infrastructure.Migrations
                 column: "QuestionID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ContentReports_UserID",
+                table: "ContentReports",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Contents_CourseID",
                 table: "Contents",
+                column: "CourseID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Coupons_CourseID",
+                table: "Coupons",
                 column: "CourseID");
 
             migrationBuilder.CreateIndex(
@@ -374,11 +516,6 @@ namespace Infrastructure.Migrations
                 name: "IX_Enrollments_CourseID",
                 table: "Enrollments",
                 column: "CourseID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Enrollments_UserID",
-                table: "Enrollments",
-                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notification_UserID",
@@ -416,6 +553,11 @@ namespace Infrastructure.Migrations
                 column: "CourseID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RateReports_ReportedRateID",
+                table: "RateReports",
+                column: "ReportedRateID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ratings_CourseID",
                 table: "Ratings",
                 column: "CourseID");
@@ -424,6 +566,16 @@ namespace Infrastructure.Migrations
                 name: "IX_Ratings_UserID",
                 table: "Ratings",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RefreshTokens_UserID",
+                table: "RefreshTokens",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsedCoupons_CouponID",
+                table: "UsedCoupons",
+                column: "CouponID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_UserID",
@@ -439,7 +591,7 @@ namespace Infrastructure.Migrations
                 name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Contents");
+                name: "ContentReports");
 
             migrationBuilder.DropTable(
                 name: "Discussions");
@@ -457,13 +609,28 @@ namespace Infrastructure.Migrations
                 name: "Progresses");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "RateReports");
+
+            migrationBuilder.DropTable(
+                name: "RefreshTokens");
+
+            migrationBuilder.DropTable(
+                name: "UsedCoupons");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");
 
             migrationBuilder.DropTable(
                 name: "Questions");
+
+            migrationBuilder.DropTable(
+                name: "Contents");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
+
+            migrationBuilder.DropTable(
+                name: "Coupons");
 
             migrationBuilder.DropTable(
                 name: "Quizzes");

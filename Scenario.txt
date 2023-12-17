@@ -11,4 +11,41 @@ An Instructor Can (Register - Login - UpdateProfile - SearchForCourse - SearchFo
 3- Admin
 An Admin Can (Register - Login - ConfirmInstructorAccount - RemoveReportedContent - BanReportedUsers)
 
--------------------------------
+-----------------------------------------
+-----------------------------------------
+
+
+username: Mohamed101
+email: mohamed@gmail.com
+password: Mo12345$$
+ID: 1
+*********************
+username: Omer101
+email: omer@gmail.com
+password: Omer12345$$
+ID: 2
+*********************
+username: Ahmed101
+email: ahmed@gmail.com
+password: Ahmed12345$$
+ID: 3
+**********************
+username: Khalid101
+email: khalid@gmail.com
+password: Khalid12345$$
+ID: 4
+----------------------------
+Marwa102
+marwa@gmail.com
+Marwa12345##
+ID: 5
+************
+Taha102
+taha@gmail.com
+Taha12345##
+ID: 6
+-------------------
+username: Rahmany
+password: rahmany@gmail.com
+email: Rahmany12345$$##
+ID: 7

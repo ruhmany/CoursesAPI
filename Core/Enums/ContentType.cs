@@ -8,8 +8,8 @@ namespace Core.Enums
 {
     public enum ContentType
     {
-        Video,
-        Document,
-        Quiz
+        Video = 1,
+        Document = 2,
+        Quiz = 3
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Commands.CourseCategoryCommands;
+﻿using Application.Commands.ContentCommands;
+using Application.Commands.CourseCategoryCommands;
 using Application.Commands.CourseCommands;
 using Application.Commands.UserCommands;
 using Application.Commands.UserProfileCommands;
@@ -22,6 +23,7 @@ namespace Application.Mapping
             CreateMap<AddUserProfileCommand, UserProfile>();
             CreateMap<AddCourseCommand, Course>();
             CreateMap<AddCourseCategoryCommand, CourseCategory>();
+            CreateMap<AddContentToCourseCommand, Content>();
         }
     }
 }

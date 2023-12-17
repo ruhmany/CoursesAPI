@@ -1,4 +1,5 @@
 ﻿using Application.Commands.UserCommands;
+using Application.Models;
 using Core.Entities;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
@@ -7,7 +8,7 @@ using MediatR;
 
 namespace Application.CommandHandlers.UserCommandsHandlers
 {
-    public class UpdateUserPasswordHandler : IRequestHandler<UpdateUserPasswordCommand, User>
+    public class UpdateUserPasswordHandler : IRequestHandler<UpdateUserPasswordCommand, UserReturnModel>
     {
         private readonly IUserRepository _userRepository;
         public readonly IUnitOfWork _unitofwork;
@@ -20,7 +21,7 @@ namespace Application.CommandHandlers.UserCommandsHandlers
             _userRepository = userRepository;
         }
 
-        public async Task<User> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)
+        public async Task<UserReturnModel> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetById(request.ID);
             var isoldpasswordvirified = _authService.VerifyPasswordHash(request.OldPassword, user.PasswordHash, user.PasswordSalt);
@@ -32,7 +33,7 @@ namespace Application.CommandHandlers.UserCommandsHandlers
                 _userRepository.Update(user);
                 _unitofwork.CommitChanges();
             }
-            return user;
+            return new UserReturnModel { Email = user.Email, Username = user.Username };
         }
     }
 }

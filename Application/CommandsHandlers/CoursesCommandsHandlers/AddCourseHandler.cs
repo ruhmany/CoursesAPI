@@ -1,4 +1,5 @@
 ﻿using Application.Commands.CourseCommands;
+using Application.Models;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces.Repositories;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Application.CommandHandlers.CoursesCommandsHandlers
 {
-    public class AddCourseHandler : IRequestHandler<AddCourseCommand, Course>
+    public class AddCourseHandler : IRequestHandler<AddCourseCommand, CourseReturnModel>
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -24,13 +25,15 @@ namespace Application.CommandHandlers.CoursesCommandsHandlers
             _mapper = mapper;
         }
 
-        public async Task<Course> Handle(AddCourseCommand request, CancellationToken cancellationToken)
+        public async Task<CourseReturnModel> Handle(AddCourseCommand request, CancellationToken cancellationToken)
         {
             var course = _mapper.Map<Course>(request);
             course.CreationDate = DateTime.UtcNow;
             await _courseRepository.Add(course);
             _unitOfWork.CommitChanges();
-            return course;
+            return new CourseReturnModel { Title = course.Title, Description = course.Description,
+                                            InstructorName = course.Instructor.UserProfile.FirstName,
+                                             CategoryName = course.Category.CategoryName }; 
         }
     }
 }

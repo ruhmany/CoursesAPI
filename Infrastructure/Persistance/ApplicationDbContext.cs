@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Infrastructure.Persistance.Configurations;
+using Infrastructure.Persistance.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,7 @@ namespace Infrastructure.Persistance
             modelBuilder.ApplyConfiguration<UsedCoupons>(new  UsedCouponsConfigurations());
             modelBuilder.ApplyConfiguration<ContentReport>(new ContentReportConfigurations());
             modelBuilder.ApplyConfiguration<RateReport>(new RateReportConfigurations());
+            modelBuilder.SeedData();
             base.OnModelCreating(modelBuilder);
         }
 

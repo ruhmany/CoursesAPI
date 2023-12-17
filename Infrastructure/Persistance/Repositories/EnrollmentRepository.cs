@@ -1,27 +1,50 @@
 ﻿using Core.Entities;
 using Core.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistance.Repositories
 {
-    public class EnrollmentRepository : BaseRepository<Enrollment>, IEnrollmentRepository
+    public class EnrollmentRepository : IEnrollmentRepository
     {
-        public EnrollmentRepository(ApplicationDbContext Context) : base(Context)
+        private readonly ApplicationDbContext _context;
+        public EnrollmentRepository(ApplicationDbContext Context)
         {
+            _context = Context;
         }
 
-        public Task<IEnumerable<Enrollment>> GetEnrollmentsByCourseId(int Id)
+        public async Task Add(Enrollment entity)
         {
-            throw new NotImplementedException();
+            await _context.Enrollments.AddAsync(entity);
         }
 
-        public Task<IEnumerable<Enrollment>> GetEnrollmentsByStudentId(int Id)
+        public void Delete(Enrollment entity)
         {
-            throw new NotImplementedException();
+            _context.Enrollments.Remove(entity);
+        }
+
+        public async Task<List<Enrollment>> GetAll()
+        {
+           return await _context.Enrollments.ToListAsync();
+        }
+
+        public async Task<Enrollment> GetById(int userid, int courseid)
+        {
+            return await _context.Enrollments.FindAsync(userid, courseid);
+        }
+
+        public async Task<IEnumerable<Enrollment>> GetEnrollmentsByCourseId(int Id)
+        {
+            return await _context.Enrollments.Where(e => e.CourseID == Id).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Enrollment>> GetEnrollmentsByStudentId(int Id)
+        {
+            return await _context.Enrollments.Where(e => e.UserID == Id).ToListAsync();
+        }
+
+        public void Update(Enrollment entity)
+        {
+            _context.Update(entity);
         }
     }
 }

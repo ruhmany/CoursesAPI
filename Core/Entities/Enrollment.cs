@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Enrollment : BaseEntity
+    public class Enrollment
     {        
         public int UserID { get; set; }
         public int CourseID { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231212102741_SettingDefaultValueForIsDeletedProperty")]
-    partial class SettingDefaultValueForIsDeletedProperty
+    [Migration("20231217133155_SeedingData")]
+    partial class SeedingData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,6 +92,52 @@ namespace Infrastructure.Migrations
                     b.ToTable("Contents");
                 });
 
+            modelBuilder.Entity("Core.Entities.ContentReport", b =>
+                {
+                    b.Property<int>("ContentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReportMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ContentID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ContentReports");
+                });
+
+            modelBuilder.Entity("Core.Entities.Coupon", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("DiscountPercentage")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CourseID");
+
+                    b.ToTable("Coupons");
+                });
+
             modelBuilder.Entity("Core.Entities.Course", b =>
                 {
                     b.Property<int>("ID")
@@ -131,6 +177,52 @@ namespace Infrastructure.Migrations
                     b.HasIndex("InstructorID");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryID = 1,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1871),
+                            Description = "Taking your from zero level to the dargon level in php within two weeks",
+                            InstructorID = 5,
+                            IsDeleted = false,
+                            Price = 1250m,
+                            Title = "PHP Fundamentals"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryID = 1,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1879),
+                            Description = "Taking your from zero level to the dargon level in C# within two weeks",
+                            InstructorID = 6,
+                            IsDeleted = false,
+                            Price = 2500m,
+                            Title = "C# Fundamentals"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CategoryID = 2,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1881),
+                            Description = "Taking your from zero level to the dargon level in php within two weeks",
+                            InstructorID = 6,
+                            IsDeleted = false,
+                            Price = 1500m,
+                            Title = "SQL Fundamentals"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            CategoryID = 3,
+                            CreationDate = new DateTime(2023, 12, 17, 13, 31, 54, 766, DateTimeKind.Utc).AddTicks(1884),
+                            Description = "Taking your from zero level to the dargon level in full-stack web development using php within two weeks",
+                            InstructorID = 5,
+                            IsDeleted = false,
+                            Price = 1200m,
+                            Title = "Full-Stack Web Development Using PHO"
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.CourseCategory", b =>
@@ -152,6 +244,32 @@ namespace Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("courseCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryName = "Programming",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryName = "Database",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CategoryName = "Software Engnireeing",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            ID = 4,
+                            CategoryName = "Project Managment",
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.Discussion", b =>
@@ -189,11 +307,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.Enrollment", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
@@ -201,19 +316,61 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
+                    b.HasKey("UserID", "CourseID");
 
                     b.HasIndex("CourseID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("Enrollments");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            CourseID = 1,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 1,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            CourseID = 3,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            CourseID = 2,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            CourseID = 3,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 4,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 4,
+                            CourseID = 2,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.Notification", b =>
@@ -366,6 +523,25 @@ namespace Infrastructure.Migrations
                     b.ToTable("Quizzes");
                 });
 
+            modelBuilder.Entity("Core.Entities.RateReport", b =>
+                {
+                    b.Property<int>("ReporterUserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReportedRateID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReportMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReporterUserID", "ReportedRateID");
+
+                    b.HasIndex("ReportedRateID");
+
+                    b.ToTable("RateReports");
+                });
+
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
                     b.Property<int>("ID")
@@ -380,8 +556,12 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("RatingValue")
-                        .HasColumnType("int");
+                    b.Property<string>("RateMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("RatingValue")
+                        .HasColumnType("real");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -427,6 +607,21 @@ namespace Infrastructure.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("RefreshTokens");
+                });
+
+            modelBuilder.Entity("Core.Entities.UsedCoupons", b =>
+                {
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CouponID")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserID", "CouponID");
+
+                    b.HasIndex("CouponID");
+
+                    b.ToTable("UsedCoupons");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
@@ -491,6 +686,9 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsBanned")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -530,6 +728,36 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Entities.Course", "Course")
                         .WithMany("Contents")
+                        .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Core.Entities.ContentReport", b =>
+                {
+                    b.HasOne("Core.Entities.Content", "Content")
+                        .WithMany("ContentReports")
+                        .HasForeignKey("ContentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("ContentReports")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Content");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.Coupon", b =>
+                {
+                    b.HasOne("Core.Entities.Course", "Course")
+                        .WithMany("Coupons")
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -665,6 +893,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("Core.Entities.RateReport", b =>
+                {
+                    b.HasOne("Core.Entities.Rating", "ReportedRate")
+                        .WithMany("RateReports")
+                        .HasForeignKey("ReportedRateID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("RateReports")
+                        .HasForeignKey("ReporterUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReportedRate");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
                     b.HasOne("Core.Entities.Course", "Course")
@@ -691,6 +938,25 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserID");
                 });
 
+            modelBuilder.Entity("Core.Entities.UsedCoupons", b =>
+                {
+                    b.HasOne("Core.Entities.Coupon", "Coupon")
+                        .WithMany("UsedCoupons")
+                        .HasForeignKey("CouponID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("UsedCoupons")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coupon");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Core.Entities.UserProfile", b =>
                 {
                     b.HasOne("Core.Entities.User", "User")
@@ -702,9 +968,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Core.Entities.Content", b =>
+                {
+                    b.Navigation("ContentReports");
+                });
+
+            modelBuilder.Entity("Core.Entities.Coupon", b =>
+                {
+                    b.Navigation("UsedCoupons");
+                });
+
             modelBuilder.Entity("Core.Entities.Course", b =>
                 {
                     b.Navigation("Contents");
+
+                    b.Navigation("Coupons");
 
                     b.Navigation("Discussions");
 
@@ -734,8 +1012,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Questions");
                 });
 
+            modelBuilder.Entity("Core.Entities.Rating", b =>
+                {
+                    b.Navigation("RateReports");
+                });
+
             modelBuilder.Entity("Core.Entities.User", b =>
                 {
+                    b.Navigation("ContentReports");
+
                     b.Navigation("Courses");
 
                     b.Navigation("Discussions");
@@ -748,9 +1033,13 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Progresses");
 
+                    b.Navigation("RateReports");
+
                     b.Navigation("Ratings");
 
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("UsedCoupons");
 
                     b.Navigation("UserProfile")
                         .IsRequired();

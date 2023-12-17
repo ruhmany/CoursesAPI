@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231214162857_AddingCouponsTable")]
-    partial class AddingCouponsTable
+    [Migration("20231217131943_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,6 +90,25 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CourseID");
 
                     b.ToTable("Contents");
+                });
+
+            modelBuilder.Entity("Core.Entities.ContentReport", b =>
+                {
+                    b.Property<int>("ContentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReportMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ContentID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ContentReports");
                 });
 
             modelBuilder.Entity("Core.Entities.Coupon", b =>
@@ -216,11 +235,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.Enrollment", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
@@ -228,17 +244,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
+                    b.HasKey("UserID", "CourseID");
 
                     b.HasIndex("CourseID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Enrollments");
                 });
@@ -393,6 +401,25 @@ namespace Infrastructure.Migrations
                     b.ToTable("Quizzes");
                 });
 
+            modelBuilder.Entity("Core.Entities.RateReport", b =>
+                {
+                    b.Property<int>("ReporterUserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReportedRateID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReportMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReporterUserID", "ReportedRateID");
+
+                    b.HasIndex("ReportedRateID");
+
+                    b.ToTable("RateReports");
+                });
+
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
                     b.Property<int>("ID")
@@ -407,8 +434,12 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("RatingValue")
-                        .HasColumnType("int");
+                    b.Property<string>("RateMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("RatingValue")
+                        .HasColumnType("real");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -533,6 +564,9 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsBanned")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -577,6 +611,25 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Core.Entities.ContentReport", b =>
+                {
+                    b.HasOne("Core.Entities.Content", "Content")
+                        .WithMany("ContentReports")
+                        .HasForeignKey("ContentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("ContentReports")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Content");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Entities.Coupon", b =>
@@ -718,6 +771,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("Core.Entities.RateReport", b =>
+                {
+                    b.HasOne("Core.Entities.Rating", "ReportedRate")
+                        .WithMany("RateReports")
+                        .HasForeignKey("ReportedRateID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("RateReports")
+                        .HasForeignKey("ReporterUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReportedRate");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
                     b.HasOne("Core.Entities.Course", "Course")
@@ -774,6 +846,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Core.Entities.Content", b =>
+                {
+                    b.Navigation("ContentReports");
+                });
+
             modelBuilder.Entity("Core.Entities.Coupon", b =>
                 {
                     b.Navigation("UsedCoupons");
@@ -813,8 +890,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Questions");
                 });
 
+            modelBuilder.Entity("Core.Entities.Rating", b =>
+                {
+                    b.Navigation("RateReports");
+                });
+
             modelBuilder.Entity("Core.Entities.User", b =>
                 {
+                    b.Navigation("ContentReports");
+
                     b.Navigation("Courses");
 
                     b.Navigation("Discussions");
@@ -826,6 +910,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Payments");
 
                     b.Navigation("Progresses");
+
+                    b.Navigation("RateReports");
 
                     b.Navigation("Ratings");
 

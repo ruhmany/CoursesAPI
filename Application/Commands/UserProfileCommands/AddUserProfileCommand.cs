@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Application.Models;
+using Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.UserProfileCommands
 {
-    public class AddUserProfileCommand : IRequest<UserProfile>
+    public class AddUserProfileCommand : IRequest<UserProfileReturnModel>
     {
         public int UserID { get; set; }
         public string FirstName { get; set; }
