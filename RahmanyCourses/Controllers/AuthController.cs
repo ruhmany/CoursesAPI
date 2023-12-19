@@ -1,11 +1,13 @@
 ﻿using Application.Commands.UserCommands;
 using Application.Queries.UserQueries;
 using AutoMapper;
+using Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RahmanyCourses.Models;
+using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -27,30 +29,7 @@ namespace RahmanyCourses.Controllers
 
 
 
-        [HttpGet("get-all-users")]
-        [Authorize(Roles = "Admin")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var request = new GetAllUsersQuery();
-            var result = await _mediator.Send(request);
-            return Ok(result);
-        }
-
-        [HttpGet("get-user-by-username")]
-        [Authorize(Roles = "Admin")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllUsers(GetUserByUsernameQuery request)
-        {
-            var result = await _mediator.Send(request);
-            if (result == null)
-                return NotFound("No user with this username");
-            return Ok(result);
-        }
+        
 
 
         [HttpPost("register")]

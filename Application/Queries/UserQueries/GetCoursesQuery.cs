@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Application.Models;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.UserQueries
 {
-    public class GetCoursesQuery : IRequest<IEnumerable<object>>
+    public class GetCoursesQuery : IRequest<IEnumerable<CourseReturnModel>>
     {
         public int UserId { get; set; }
     }

@@ -9,6 +9,6 @@ namespace Core.Interfaces.Repositories
 {
     public interface ICourseRepository : IBaseRepository<Course>
     {
-        
+        Task<IEnumerable<Course>> GetTopRatedCourses();
     }
 }

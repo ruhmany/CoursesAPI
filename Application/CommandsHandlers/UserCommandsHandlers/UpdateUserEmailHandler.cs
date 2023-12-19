@@ -1,6 +1,5 @@
 ﻿using Application.Commands.UserCommands;
 using Application.Models;
-using Core.Entities;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.UnitOfWork;
 using MediatR;

@@ -1,15 +1,11 @@
-﻿using Application.Queries.UserQueries;
+﻿using Application.Models;
+using Application.Queries.UserQueries;
 using Core.Interfaces.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.QueryHandlers.UserQueriesHandlers
 {
-    internal class GetCoursesQueryHandler : IRequestHandler<GetCoursesQuery, IEnumerable<Object>>
+    internal class GetCoursesQueryHandler : IRequestHandler<GetCoursesQuery, IEnumerable<CourseReturnModel>>
     {
         private readonly IUserRepository _userRepository;
 
@@ -18,10 +14,19 @@ namespace Application.QueryHandlers.UserQueriesHandlers
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<object>> Handle(GetCoursesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CourseReturnModel>> Handle(GetCoursesQuery request, CancellationToken cancellationToken)
         {
             var courses = await _userRepository.GetEnrolledInCourses(request.UserId);
-            return courses;
+            var result = courses.Select(c => new CourseReturnModel 
+            { 
+                CategoryName = c.Category.CategoryName, 
+                Description = c.Description,
+                Rating = c.Ratings.Average(r => r.RatingValue),
+                StudentsNumber = c.Enrollments.Count(), 
+                InstructorName = c.Instructor.UserProfile?.FirstName, 
+                Title = c.Title
+            });
+            return result;
         }
     }
 }

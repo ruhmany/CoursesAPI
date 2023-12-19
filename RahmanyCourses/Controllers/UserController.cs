@@ -4,6 +4,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System.Security.Claims;
 
 namespace RahmanyCourses.Controllers
@@ -32,6 +33,9 @@ namespace RahmanyCourses.Controllers
         {
             var request = new GetAllUsersQuery();
             var result = await _mediator.Send(request);
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var time = DateTime.UtcNow;
+            Log.Information("User:{@userID} get the all users data at{@time}", userID, time);
             return Ok(result);
         }
 
@@ -48,15 +52,6 @@ namespace RahmanyCourses.Controllers
             return Ok(result);
         }
 
-        [HttpGet("get-my-courses")]
-        [Authorize]
-        public async Task<IActionResult> GetCoursesByUserID()
-        {
-            var userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var request = new GetCoursesQuery { UserId = userid };
-            var result = await _mediator.Send(request);
-            return Ok(result);
-        }
 
         [HttpPut("update-user-email")]
         public async Task<IActionResult> UpdateUserEmail(UpdateUserEmailCommand request)

@@ -6,11 +6,6 @@ using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Interfaces.UnitOfWork;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.CommandHandlers.UserProfileCommandsHandlers
 {

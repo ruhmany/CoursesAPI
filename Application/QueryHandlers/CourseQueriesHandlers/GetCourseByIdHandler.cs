@@ -1,5 +1,4 @@
-﻿using Application.Helpers;
-using Application.Models;
+﻿using Application.Models;
 using Application.Queries.CourseQueries;
 using Core.Entities;
 using Core.Interfaces.Repositories;
@@ -26,7 +25,7 @@ namespace Application.QueryHandlers.CourseQueriesHandlers
             var course = await _courseRepository.GetById(request.Id);
             if (course == null)
                 return null;
-            var rating = CalculateCourseRate.ClacRate(course.Ratings);
+            var rating = course.Ratings.Average(r => r.RatingValue);
             return new CourseReturnModel
             {
                 Title = course.Title,

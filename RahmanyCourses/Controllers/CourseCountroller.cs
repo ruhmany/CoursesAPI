@@ -26,6 +26,28 @@ namespace RahmanyCourses.Controllers
         }
 
         // Get All Courses With Its Rates.
+        [HttpGet("get-all-courses")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllCourses()
+        {
+            var request = new GetCoursesQuery();
+            var result = await _mediator.Send(request);
+            return Ok(result);
+        }
+
+
+        [HttpGet("get-top-rated-courses")]
+        [ProducesResponseType(StatusCodes.Status200OK)]        
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetTopRatedCourses()
+        {
+            var request = new GetTopRatedCoursesQuery();
+            var result = await _mediator.Send(request);
+            return Ok(result);
+        }
 
         [HttpGet("get-my-created-courses")]
         [Authorize(Roles = "Instructor")]
