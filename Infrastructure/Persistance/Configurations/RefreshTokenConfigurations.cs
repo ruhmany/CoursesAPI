@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using RahmanyCourses.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Persistance.Configurations
+namespace RahmanyCourses.Infrastructure.Persistance.Configurations
 {
     public class RefreshTokenConfigurations : IEntityTypeConfiguration<RefreshToken>
     {

@@ -1,8 +1,8 @@
-﻿using Application.Commands.CourseCategoryCommands;
+﻿using RahmanyCourses.Application.Commands.CourseCategoryCommands;
 using AutoMapper;
-using Core.Entities;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.UnitOfWork;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.CommandHandlers.CourseCategoryCommandsHandlers
+namespace RahmanyCourses.Application.CommandHandlers.CourseCategoryCommandsHandlers
 {
     internal class AddCourseCategoryHandler : IRequestHandler<AddCourseCategoryCommand, CourseCategory>
     {

@@ -1,11 +1,6 @@
-using Application;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
-using Core.Interfaces.UnitOfWork;
-using Infrastructure.Persistance;
-using Infrastructure.Persistance.Repositories;
-using Infrastructure.Persistance.Services;
-using Infrastructure.Persistance.UnitOfWork;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.Services;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +9,11 @@ using Serilog;
 using System.CodeDom;
 using System.Text;
 using System.Text.Json.Serialization;
+using RahmanyCourses.Application;
+using RahmanyCourses.Infrastructure.Persistance.UnitOfWork;
+using RahmanyCourses.Infrastructure.Persistance.Services;
+using RahmanyCourses.Infrastructure.Persistance.Repositories;
+using RahmanyCourses.Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 

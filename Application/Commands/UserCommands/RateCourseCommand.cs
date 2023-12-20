@@ -1,7 +1,7 @@
-﻿using Core.Entities;
+﻿using RahmanyCourses.Core.Entities;
 using MediatR;
 
-namespace Application.Commands.UserCommands
+namespace RahmanyCourses.Application.Commands.UserCommands
 {
     public class RateCourseCommand :IRequest<Rating>
     {

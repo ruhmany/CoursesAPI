@@ -1,6 +1,6 @@
-﻿using Application.Models;
-using Core.Entities;
-using Core.Enums;
+﻿using RahmanyCourses.Application.Models;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.UserCommands
+namespace RahmanyCourses.Application.Commands.UserCommands
 {
     public class UpdateUserEmailCommand : IRequest<UserReturnModel>
     {

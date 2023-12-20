@@ -1,10 +1,10 @@
-﻿using Application.Commands.CourseCategoryCommands;
+﻿using RahmanyCourses.Application.Commands.CourseCategoryCommands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace RahmanyCourses.Controllers
+namespace RahmanyCourses.Persentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

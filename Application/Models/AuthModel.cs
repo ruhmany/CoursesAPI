@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using RahmanyCourses.Core.Enums;
 
-namespace Application.Models
+namespace RahmanyCourses.Application.Models
 {
     public class AuthModel
     {

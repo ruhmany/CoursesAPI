@@ -1,5 +1,5 @@
-﻿using Application.Models;
-using Core.Entities;
+﻿using RahmanyCourses.Application.Models;
+using RahmanyCourses.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.UserProfileCommands
+namespace RahmanyCourses.Application.Commands.UserProfileCommands
 {
     public class AddUserProfileCommand : IRequest<UserProfileReturnModel>
     {

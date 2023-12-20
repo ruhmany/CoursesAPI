@@ -1,8 +1,8 @@
-﻿using Core.Entities;
+﻿using RahmanyCourses.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Persistance.Configurations
+namespace RahmanyCourses.Infrastructure.Persistance.Configurations
 {
     internal class UsedCouponsConfigurations : IEntityTypeConfiguration<UsedCoupons>
     {

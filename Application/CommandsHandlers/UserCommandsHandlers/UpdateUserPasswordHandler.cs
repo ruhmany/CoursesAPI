@@ -1,12 +1,12 @@
-﻿using Application.Commands.UserCommands;
-using Application.Models;
-using Core.Entities;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
-using Core.Interfaces.UnitOfWork;
+﻿using RahmanyCourses.Application.Commands.UserCommands;
+using RahmanyCourses.Application.Models;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.Services;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
 
-namespace Application.CommandHandlers.UserCommandsHandlers
+namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
 {
     public class UpdateUserPasswordHandler : IRequestHandler<UpdateUserPasswordCommand, UserReturnModel>
     {

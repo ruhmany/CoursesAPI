@@ -1,18 +1,10 @@
-﻿using Application.Models;
-using Application.Queries.CourseQueries;
-using Application.Queries.UserQueries;
+﻿using RahmanyCourses.Application.Models;
+using RahmanyCourses.Application.Queries.CourseQueries;
 using AutoMapper;
 using FakeItEasy;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using RahmanyCourses.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RahmanyCourses.Persentation.Controllers;
 
 namespace RahmanyCourses.Test.Controllers
 {

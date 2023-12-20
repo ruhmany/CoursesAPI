@@ -1,10 +1,10 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using Core.Interfaces.Services;
+using RahmanyCourses.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.Persistance.Services
+namespace RahmanyCourses.Infrastructure.Persistance.Services
 {
     public class PhotoService : IPhotoService
     {

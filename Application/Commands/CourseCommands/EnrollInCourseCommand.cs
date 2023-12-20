@@ -1,8 +1,8 @@
-﻿using Application.Models;
-using Core.Entities;
+﻿using RahmanyCourses.Application.Models;
+using RahmanyCourses.Core.Entities;
 using MediatR;
 
-namespace Application.Commands.CourseCommands
+namespace RahmanyCourses.Application.Commands.CourseCommands
 {
     public class EnrollInCourseCommand : IRequest<EnrollmentReturnModel>
     {

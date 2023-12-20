@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Enums
+namespace RahmanyCourses.Core.Enums
 {
     public enum ContentType
     {

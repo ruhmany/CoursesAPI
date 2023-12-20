@@ -1,4 +1,4 @@
-﻿namespace RahmanyCourses.Models
+﻿namespace RahmanyCourses.Persentation.Models
 {
     public class CourseModel
     {

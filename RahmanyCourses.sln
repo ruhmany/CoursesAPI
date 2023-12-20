@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{66F49684-2DF8-41C5-8C36-B2014DD0DCF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RahmanyCourses.Core", "Core\RahmanyCourses.Core.csproj", "{66F49684-2DF8-41C5-8C36-B2014DD0DCF1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{47A1D6F6-C396-4AE2-AC82-6F6089BEAA4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RahmanyCourses.Application", "Application\RahmanyCourses.Application.csproj", "{47A1D6F6-C396-4AE2-AC82-6F6089BEAA4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RahmanyCourses", "RahmanyCourses\RahmanyCourses.csproj", "{EEC5FA03-C446-4697-8C3E-A9CC6F7AF56A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RahmanyCourses.Persentation", "RahmanyCourses\RahmanyCourses.Persentation.csproj", "{EEC5FA03-C446-4697-8C3E-A9CC6F7AF56A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5C555691-CAAF-4712-9B77-BDEE23169576}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RahmanyCourses.Infrastructure", "Infrastructure\RahmanyCourses.Infrastructure.csproj", "{5C555691-CAAF-4712-9B77-BDEE23169576}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RahmanyCourses.Test", "RahmanyCourses.Test\RahmanyCourses.Test.csproj", "{24C4E918-4080-4B02-81A8-1E67869712D5}"
 EndProject

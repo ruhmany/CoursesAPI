@@ -1,7 +1,7 @@
-﻿using Core.Entities;
+﻿using RahmanyCourses.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Persistance.Helpers
+namespace RahmanyCourses.Infrastructure.Persistance.Helpers
 {
     public static class DataSeeding
     {

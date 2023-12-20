@@ -1,6 +1,6 @@
-﻿using Core.Entities;
+﻿using RahmanyCourses.Core.Entities;
 
-namespace Core.Interfaces.Repositories
+namespace RahmanyCourses.Core.Interfaces.Repositories
 {
     public interface IEnrollmentRepository 
     {

@@ -1,15 +1,9 @@
-﻿using Application.Models;
-using Core.Entities;
-using Core.Enums;
+﻿using RahmanyCourses.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RahmanyCourses.Application.Models;
 
-namespace Application.Commands.ContentCommands
+namespace RahmanyCourses.Application.Commands.ContentCommands
 {
     public class AddContentToCourseCommand : IRequest<ContentReturnModel>
     {

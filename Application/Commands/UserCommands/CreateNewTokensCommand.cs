@@ -1,4 +1,4 @@
-﻿using Application.Models;
+﻿using RahmanyCourses.Application.Models;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.UserCommands
+namespace RahmanyCourses.Application.Commands.UserCommands
 {
     public class CreateNewTokensCommand : IRequest<AuthModel>
     {

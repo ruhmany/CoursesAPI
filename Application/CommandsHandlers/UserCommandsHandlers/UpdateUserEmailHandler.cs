@@ -1,10 +1,10 @@
-﻿using Application.Commands.UserCommands;
-using Application.Models;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.UnitOfWork;
+﻿using RahmanyCourses.Application.Commands.UserCommands;
+using RahmanyCourses.Application.Models;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
 
-namespace Application.CommandHandlers.UserCommandsHandlers
+namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
 {
     public class UpdateUserEmailHandler : IRequestHandler<UpdateUserEmailCommand, UserReturnModel>
     {        

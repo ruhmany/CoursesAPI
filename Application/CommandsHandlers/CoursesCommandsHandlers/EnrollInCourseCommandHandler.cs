@@ -1,12 +1,12 @@
-﻿using Application.Commands.CourseCommands;
-using Application.Models;
+﻿using RahmanyCourses.Application.Commands.CourseCommands;
+using RahmanyCourses.Application.Models;
 using AutoMapper;
-using Core.Entities;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.UnitOfWork;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
 
-namespace Application.CommandsHandlers.CoursesCommandsHandlers
+namespace RahmanyCourses.Application.CommandsHandlers.CoursesCommandsHandlers
 {
     internal class EnrollInCourseCommandHandler : IRequestHandler<EnrollInCourseCommand, EnrollmentReturnModel>
     {

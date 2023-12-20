@@ -1,16 +1,16 @@
-﻿using Application.Commands.CourseCommands;
-using Application.Commands.UserCommands;
-using Application.Queries.CourseQueries;
-using Application.Queries.UserQueries;
+﻿using RahmanyCourses.Application.Commands.CourseCommands;
+using RahmanyCourses.Application.Commands.UserCommands;
+using RahmanyCourses.Application.Queries.CourseQueries;
+using RahmanyCourses.Application.Queries.UserQueries;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RahmanyCourses.DTO;
-using RahmanyCourses.Models;
 using System.Security.Claims;
+using RahmanyCourses.Persentation.Models;
+using RahmanyCourses.Persentation.DTO;
 
-namespace RahmanyCourses.Controllers
+namespace RahmanyCourses.Persentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

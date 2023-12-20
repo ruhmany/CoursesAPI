@@ -1,12 +1,12 @@
-﻿using Application.Commands.ContentCommands;
-using Application.Commands.CourseCommands;
-using Application.Commands.UserCommands;
+﻿using RahmanyCourses.Application.Commands.ContentCommands;
+using RahmanyCourses.Application.Commands.CourseCommands;
+using RahmanyCourses.Application.Commands.UserCommands;
 using AutoMapper;
-using Core.Entities;
-using RahmanyCourses.DTO;
-using RahmanyCourses.Models;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Persentation.Models;
+using RahmanyCourses.Persentation.DTO;
 
-namespace RahmanyCourses.Mapping
+namespace RahmanyCourses.Persentation.Mapping
 {
     public class MappingProfile : Profile
     {

@@ -1,11 +1,11 @@
-﻿using Core.Interfaces.UnitOfWork;
+﻿using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Persistance.UnitOfWork
+namespace RahmanyCourses.Infrastructure.Persistance.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

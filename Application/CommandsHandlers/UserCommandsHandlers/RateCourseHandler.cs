@@ -1,10 +1,10 @@
-﻿using Application.Commands.UserCommands;
-using Core.Entities;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.UnitOfWork;
+﻿using RahmanyCourses.Application.Commands.UserCommands;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
 
-namespace Application.CommandsHandlers.UserCommandsHandlers
+namespace RahmanyCourses.Application.CommandsHandlers.UserCommandsHandlers
 {
     internal class RateCourseHandler : IRequestHandler<RateCourseCommand, Rating>
     {

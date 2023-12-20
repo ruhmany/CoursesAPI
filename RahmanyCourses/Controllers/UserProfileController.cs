@@ -1,11 +1,11 @@
-﻿using Application.Commands.UserProfileCommands;
+﻿using RahmanyCourses.Application.Commands.UserProfileCommands;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RahmanyCourses.Models;
+using RahmanyCourses.Persentation.Models;
 
-namespace RahmanyCourses.Controllers
+namespace RahmanyCourses.Persentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

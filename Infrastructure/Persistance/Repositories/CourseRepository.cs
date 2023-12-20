@@ -1,8 +1,8 @@
-﻿using Core.Entities;
-using Core.Interfaces.Repositories;
+﻿using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Persistance.Repositories
+namespace RahmanyCourses.Infrastructure.Persistance.Repositories
 {
     public class CourseRepository : BaseRepository<Course>, ICourseRepository
     {

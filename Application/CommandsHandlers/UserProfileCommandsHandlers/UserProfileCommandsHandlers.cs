@@ -1,13 +1,13 @@
-﻿using Application.Commands.UserProfileCommands;
-using Application.Models;
+﻿using RahmanyCourses.Application.Commands.UserProfileCommands;
+using RahmanyCourses.Application.Models;
 using AutoMapper;
-using Core.Entities;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
-using Core.Interfaces.UnitOfWork;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.Services;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
 
-namespace Application.CommandHandlers.UserProfileCommandsHandlers
+namespace RahmanyCourses.Application.CommandHandlers.UserProfileCommandsHandlers
 {
     public class UserProfileCommandsHandlers : IRequestHandler<AddUserProfileCommand, UserProfileReturnModel>
     {

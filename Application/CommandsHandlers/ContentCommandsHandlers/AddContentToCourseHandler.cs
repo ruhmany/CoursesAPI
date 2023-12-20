@@ -1,14 +1,13 @@
-﻿using Application.Commands.ContentCommands;
-using Application.Models;
+﻿using RahmanyCourses.Application.Commands.ContentCommands;
+using RahmanyCourses.Application.Models;
 using AutoMapper;
-using Core.Entities;
-using Core.Enums;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
-using Core.Interfaces.UnitOfWork;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Enums;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.Services;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
-
-namespace Application.CommandHandlers.ContentCommandsHandlers
+namespace RahmanyCourses.Application.CommandHandlers.ContentCommandsHandlers
 {
     internal class AddContentToCourseHandler : IRequestHandler<AddContentToCourseCommand, ContentReturnModel>
     {

@@ -1,12 +1,11 @@
-﻿using Application.Commands.UserProfileCommands;
-using Application.Models;
-using Core.Entities;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.Services;
-using Core.Interfaces.UnitOfWork;
-using MediatR;
+﻿using MediatR;
+using RahmanyCourses.Application.Commands.UserProfileCommands;
+using RahmanyCourses.Application.Models;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.Services;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 
-namespace Application.CommandsHandlers.UserProfileCommandsHandlers
+namespace RahmanyCourses.Application.CommandsHandlers.UserProfileCommandsHandlers
 {
     public class UpdateProfilePictureCommandHandler : IRequestHandler<UpdateProfilePictureCommand, UserProfileReturnModel>
     {

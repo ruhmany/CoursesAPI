@@ -1,9 +1,9 @@
-﻿using Application.Commands.CourseCommands;
-using Application.Models;
+﻿using RahmanyCourses.Application.Commands.CourseCommands;
+using RahmanyCourses.Application.Models;
 using AutoMapper;
-using Core.Entities;
-using Core.Interfaces.Repositories;
-using Core.Interfaces.UnitOfWork;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
+using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.CommandHandlers.CoursesCommandsHandlers
+namespace RahmanyCourses.Application.CommandHandlers.CoursesCommandsHandlers
 {
     public class AddCourseHandler : IRequestHandler<AddCourseCommand, CourseReturnModel>
     {

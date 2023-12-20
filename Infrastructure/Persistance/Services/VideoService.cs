@@ -1,6 +1,6 @@
 ﻿using CloudinaryDotNet.Actions;
 using CloudinaryDotNet;
-using Core.Interfaces.Services;
+using RahmanyCourses.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Persistance.Services
+namespace RahmanyCourses.Infrastructure.Persistance.Services
 {
     public class VideoService : IVideoService
     {

@@ -1,14 +1,14 @@
-﻿using Core.Entities;
-using Infrastructure.Persistance.Configurations;
-using Infrastructure.Persistance.Helpers;
+﻿using RahmanyCourses.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RahmanyCourses.Infrastructure.Persistance.Configurations;
+using RahmanyCourses.Infrastructure.Persistance.Helpers;
 
-namespace Infrastructure.Persistance
+namespace RahmanyCourses.Infrastructure.Persistance
 {
     public class ApplicationDbContext : DbContext
     {

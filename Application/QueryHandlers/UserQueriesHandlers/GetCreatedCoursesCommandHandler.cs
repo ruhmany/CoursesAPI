@@ -1,6 +1,6 @@
-﻿using Application.Models;
-using Application.Queries.UserQueries;
-using Core.Interfaces.Repositories;
+﻿using RahmanyCourses.Application.Models;
+using RahmanyCourses.Application.Queries.UserQueries;
+using RahmanyCourses.Core.Interfaces.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.QueryHandlers.UserQueriesHandlers
+namespace RahmanyCourses.Application.QueryHandlers.UserQueriesHandlers
 {
     internal class GetCreatedCoursesCommandHandler : IRequestHandler<GetCreatedCoursesCommand, IEnumerable<CourseReturnModel>>
     {

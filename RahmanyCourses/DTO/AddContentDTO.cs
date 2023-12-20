@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using RahmanyCourses.Core.Enums;
 
-namespace RahmanyCourses.DTO
+namespace RahmanyCourses.Persentation.DTO
 {
     public class AddContentDTO
     {

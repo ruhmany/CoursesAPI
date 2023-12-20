@@ -1,5 +1,5 @@
-﻿using Application.Commands.UserCommands;
-using Application.Queries.UserQueries;
+﻿using RahmanyCourses.Application.Commands.UserCommands;
+using RahmanyCourses.Application.Queries.UserQueries;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Security.Claims;
 
-namespace RahmanyCourses.Controllers
+namespace RahmanyCourses.Persentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

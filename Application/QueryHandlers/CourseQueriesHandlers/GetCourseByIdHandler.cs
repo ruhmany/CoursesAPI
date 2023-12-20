@@ -1,7 +1,7 @@
-﻿using Application.Models;
-using Application.Queries.CourseQueries;
-using Core.Entities;
-using Core.Interfaces.Repositories;
+﻿using RahmanyCourses.Application.Models;
+using RahmanyCourses.Application.Queries.CourseQueries;
+using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Interfaces.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.QueryHandlers.CourseQueriesHandlers
+namespace RahmanyCourses.Application.QueryHandlers.CourseQueriesHandlers
 {
     internal class GetCourseByIdHandler : IRequestHandler<GetCourseByIdQuery, CourseReturnModel>
     {

@@ -1,8 +1,8 @@
-﻿using Core.Entities;
-using Core.Enums;
+﻿using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Core.Enums;
 using System.Text.Json.Serialization;
 
-namespace RahmanyCourses.Models
+namespace RahmanyCourses.Persentation.Models
 {
     public class UserResponseModel
     {

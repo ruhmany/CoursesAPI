@@ -1,4 +1,4 @@
-﻿namespace Core.Entities
+﻿namespace RahmanyCourses.Core.Entities
 {
 
     public class RefreshToken : BaseEntity

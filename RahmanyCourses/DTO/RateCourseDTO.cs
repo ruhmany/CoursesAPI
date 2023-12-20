@@ -1,4 +1,4 @@
-﻿namespace RahmanyCourses.DTO
+﻿namespace RahmanyCourses.Persentation.DTO
 {
     public class RateCourseDTO
     {
