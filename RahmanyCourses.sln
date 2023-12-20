@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RahmanyCourses", "RahmanyCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5C555691-CAAF-4712-9B77-BDEE23169576}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RahmanyCourses.Test", "RahmanyCourses.Test\RahmanyCourses.Test.csproj", "{24C4E918-4080-4B02-81A8-1E67869712D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5C555691-CAAF-4712-9B77-BDEE23169576}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C555691-CAAF-4712-9B77-BDEE23169576}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C555691-CAAF-4712-9B77-BDEE23169576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C4E918-4080-4B02-81A8-1E67869712D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C4E918-4080-4B02-81A8-1E67869712D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C4E918-4080-4B02-81A8-1E67869712D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C4E918-4080-4B02-81A8-1E67869712D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
