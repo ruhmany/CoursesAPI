@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using RahmanyCourses.Application.Commands.UserProfileCommands;
 using RahmanyCourses.Application.Models;
 using RahmanyCourses.Core.Interfaces.Repositories;
@@ -13,11 +14,11 @@ namespace RahmanyCourses.Application.CommandsHandlers.UserProfileCommandsHandler
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateProfilePictureCommandHandler(IUnitOfWork unitOfWork, IPhotoService photoService, IUserProfileRepository repository)
+        public UpdateProfilePictureCommandHandler(IServiceProvider provider)
         {
-            _unitOfWork = unitOfWork;
-            _photoService = photoService;
-            _repository = repository;
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _photoService = provider.GetRequiredService<IPhotoService>();
+            _repository = provider.GetRequiredService<IUserProfileRepository>();
         }
 
         public async Task<UserProfileReturnModel> Handle(UpdateProfilePictureCommand request, CancellationToken cancellationToken)

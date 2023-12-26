@@ -6,11 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System.CodeDom;
 using System.Text;
 using System.Text.Json.Serialization;
 using RahmanyCourses.Application;
-using RahmanyCourses.Infrastructure.Persistance.UnitOfWork;
 using RahmanyCourses.Infrastructure.Persistance.Services;
 using RahmanyCourses.Infrastructure.Persistance.Repositories;
 using RahmanyCourses.Infrastructure.Persistance;
@@ -49,28 +47,10 @@ builder.Services.AddSwaggerGen(c => {
     } );
 builder.Services.AddAutoMapper(typeof(DependancyInjection).Assembly);
 
-
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(DependancyInjection).Assembly));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IPhotoService, PhotoService>();
-builder.Services.AddScoped<IVideoService, VideoService>();
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
-builder.Services.AddScoped<IContentRepository, ContentRepository>();
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-builder.Services.AddScoped<IcourseCategoryRepository, CourseCategoryRepository>();
-builder.Services.AddScoped<IDiscussionRepository, DiscussionRepository>();
-builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
-builder.Services.AddScoped<INotificationsRepository, NotifcationRepository>();
-builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
-builder.Services.AddScoped<IProgressRepository, ProgressRepository>();
-builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
-builder.Services.AddScoped<IQuizRepository, QuizRepository>();
-builder.Services.AddScoped<IRatingRepository, RatingRepository>();
-builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.InjectServices();
+
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

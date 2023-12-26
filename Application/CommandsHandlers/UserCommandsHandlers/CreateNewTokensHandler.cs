@@ -5,6 +5,7 @@ using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.Services;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
 {
@@ -15,12 +16,12 @@ namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
 
-        public CreateNewTokensHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, IAuthService authService, IMapper mapper)
+        public CreateNewTokensHandler(IServiceProvider provider)
         {
-            _userRepository = userRepository;
-            _unitOfWork = unitOfWork;
-            _authService = authService;
-            _mapper = mapper;
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _authService = provider.GetRequiredService<IAuthService>();
+            _userRepository = provider.GetRequiredService<IUserRepository>();
+            _mapper = provider.GetRequiredService<IMapper>();
         }
 
         public async Task<AuthModel> Handle(CreateNewTokensCommand request, CancellationToken cancellationToken)

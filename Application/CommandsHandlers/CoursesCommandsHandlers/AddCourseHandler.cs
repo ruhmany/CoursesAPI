@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RahmanyCourses.Application.CommandHandlers.CoursesCommandsHandlers
 {
@@ -18,11 +19,11 @@ namespace RahmanyCourses.Application.CommandHandlers.CoursesCommandsHandlers
         private readonly ICourseRepository _courseRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public AddCourseHandler(ICourseRepository courseRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        public AddCourseHandler(IServiceProvider provider)
         {
-            _courseRepository = courseRepository;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _courseRepository = provider.GetRequiredService<ICourseRepository>();
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _mapper = provider.GetRequiredService<IMapper>();
         }
 
         public async Task<CourseReturnModel> Handle(AddCourseCommand request, CancellationToken cancellationToken)
@@ -32,8 +33,8 @@ namespace RahmanyCourses.Application.CommandHandlers.CoursesCommandsHandlers
             await _courseRepository.Add(course);
             _unitOfWork.CommitChanges();
             return new CourseReturnModel { Title = course.Title, Description = course.Description,
-                                            InstructorName = course.Instructor.UserProfile.FirstName,
-                                             CategoryName = course.Category.CategoryName }; 
+                                            InstructorName = "asasas",
+                                             CategoryName = "asasa"}; 
         }
     }
 }

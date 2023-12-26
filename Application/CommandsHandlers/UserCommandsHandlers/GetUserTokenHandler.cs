@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
 {
@@ -19,11 +21,11 @@ namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
         private readonly IAuthService _authService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetUserTokenHandler(IAuthService authService, IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public GetUserTokenHandler(IServiceProvider provider)
         {
-            _authService = authService;
-            _userRepository = userRepository;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _authService = provider.GetRequiredService<IAuthService>();
+            _userRepository = provider.GetRequiredService<IUserRepository>();
         }
 
         public async Task<AuthModel> Handle(GetUserTokenCommand request, CancellationToken cancellationToken)

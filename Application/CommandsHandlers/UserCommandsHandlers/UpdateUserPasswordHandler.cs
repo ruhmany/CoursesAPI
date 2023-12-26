@@ -5,6 +5,8 @@ using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.Services;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
 {
@@ -14,11 +16,11 @@ namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
         public readonly IUnitOfWork _unitofwork;
         private readonly IAuthService _authService;
 
-        public UpdateUserPasswordHandler(IAuthService authService, IUnitOfWork unitofwork, IUserRepository userRepository)
+        public UpdateUserPasswordHandler(IServiceProvider provider)
         {
-            _authService = authService;
-            _unitofwork = unitofwork;
-            _userRepository = userRepository;
+            _unitofwork = provider.GetRequiredService<IUnitOfWork>();
+            _authService = provider.GetRequiredService<IAuthService>();
+            _userRepository = provider.GetRequiredService<IUserRepository>();
         }
 
         public async Task<UserReturnModel> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)

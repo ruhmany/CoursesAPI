@@ -69,8 +69,8 @@ namespace RahmanyCourses.Infrastructure.Persistance
                 var entity = entry.Entity;
                 if(entry.State == EntityState.Deleted)
                 {
-                    entry.State = EntityState.Modified;
-                    entry.GetType().GetProperty("IsDeleted").SetValue(entity, true);
+                    entry.State = EntityState.Modified;                    
+                    entity.GetType().GetProperty("IsDeleted").SetValue(entity ,true);
                 }
             }
             return base.SaveChanges();

@@ -7,6 +7,8 @@ using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.Services;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace RahmanyCourses.Application.CommandHandlers.ContentCommandsHandlers
 {
     internal class AddContentToCourseHandler : IRequestHandler<AddContentToCourseCommand, ContentReturnModel>
@@ -16,12 +18,12 @@ namespace RahmanyCourses.Application.CommandHandlers.ContentCommandsHandlers
         private readonly IVideoService _videoService;
         private readonly IMapper _mapper;
 
-        public AddContentToCourseHandler(IMapper mapper, IVideoService videoService, IUnitOfWork unitOfWork, ICourseRepository courseRepository)
+        public AddContentToCourseHandler(IServiceProvider providor)
         {
-            _mapper = mapper;
-            _videoService = videoService;
-            _unitOfWork = unitOfWork;
-            _courseRepository = courseRepository;
+            _mapper = providor.GetRequiredService<IMapper>();
+            _videoService = providor.GetRequiredService<IVideoService>();
+            _unitOfWork = providor.GetRequiredService<IUnitOfWork>();
+            _courseRepository = providor.GetRequiredService<ICourseRepository>();
         }
 
         public async Task<ContentReturnModel> Handle(AddContentToCourseCommand request, CancellationToken cancellationToken)

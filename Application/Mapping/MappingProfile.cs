@@ -24,6 +24,7 @@ namespace RahmanyCourses.Application.Mapping
             CreateMap<AddCourseCommand, Course>();
             CreateMap<AddCourseCategoryCommand, CourseCategory>();
             CreateMap<AddContentToCourseCommand, Content>();
+            CreateMap<Course, CourseReturnModel>();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace RahmanyCourses.Persentation.Mapping
             CreateMap<AddContentDTO, AddContentToCourseCommand>();
             CreateMap<UserProfile, UserProfileResponse>();
             CreateMap<RateCourseDTO, RateCourseCommand>();
+            CreateMap<UpdateContentDTO, UpdateContentCommand>();
         }
     }
 }

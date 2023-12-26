@@ -21,19 +21,53 @@ namespace RahmanyCourses.Persentation.Controllers
             _mapper = mapper;
         }
 
+
         [HttpPost("add-content"), Authorize(Roles = "Instructor")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> AddContent(AddContentDTO contentDTO)
         {
-
             var request = _mapper.Map<AddContentToCourseCommand>(contentDTO);
             request.CourseOwnerID = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var result = await _mediator.Send(request);
             if(!result.IsCourseFound)
                 return NotFound();
             if(!result.IsUserAuthorized)
+                return Unauthorized();
+            return Ok(result);
+        }
+
+
+        [HttpPut("update-content"), Authorize("Instructor")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> UpdateContent(UpdateContentDTO updateContentDTO)
+        {
+            var request = _mapper.Map<UpdateContentCommand>(updateContentDTO);
+            request.CourseOwnerID = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var result = await _mediator.Send(request);
+            if (!result.IsCourseFound || result == null)
+                return NotFound();
+            if (!result.IsUserAuthorized)
+                return Unauthorized();
+            return Ok(result);
+        }
+
+
+        [HttpDelete("delete-content"), Authorize("Instructor")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> DeleteContent(int contentid)
+        {
+            var request =new DeleteContentCommand { ContentId =  contentid };
+            request.UserID = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var result = await _mediator.Send(request);
+            if (!result.IsFound || result == null)
+                return NotFound();
+            if (!result.IsAuthorized)
                 return Unauthorized();
             return Ok(result);
         }

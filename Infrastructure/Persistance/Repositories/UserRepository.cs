@@ -15,15 +15,7 @@ namespace RahmanyCourses.Infrastructure.Persistance.Repositories
         public async Task<User> GetByEmail(string email)
         {
             return await _context.Users.AsQueryable().Where(u => u.Email == email).FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<Course>> GetEnrolledInCourses(int userId)
-        {
-            var courses = await _context.Users.Where(user => user.ID == userId)
-                .SelectMany(user => user.Enrollments)
-                .Select(enrollment => enrollment.Course).ToListAsync();
-            return courses;
-        }
+        }       
 
         public async Task<User> GetUserByUsername(string username)
         {

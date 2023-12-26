@@ -11,6 +11,5 @@ namespace RahmanyCourses.Core.Interfaces.Repositories
     {
         Task<User> GetByEmail(string email);
         Task<User> GetUserByUsername(string username);
-        Task<IEnumerable<Course>> GetEnrolledInCourses(int userId);
     }
 }

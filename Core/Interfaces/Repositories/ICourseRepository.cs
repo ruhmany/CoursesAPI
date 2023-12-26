@@ -10,5 +10,6 @@ namespace RahmanyCourses.Core.Interfaces.Repositories
     public interface ICourseRepository : IBaseRepository<Course>
     {
         Task<IEnumerable<Course>> GetTopRatedCourses();
+        Task<IEnumerable<Course>> GetEnrolledInCourses(int userId);
     }
 }

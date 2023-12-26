@@ -4,6 +4,7 @@ using RahmanyCourses.Core.Entities;
 using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,11 @@ namespace RahmanyCourses.Application.CommandHandlers.CourseCategoryCommandsHandl
         private readonly IcourseCategoryRepository _courseCategoryRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public AddCourseCategoryHandler(IcourseCategoryRepository courseCategoryRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        public AddCourseCategoryHandler(IServiceProvider provider)
         {
-            _courseCategoryRepository = courseCategoryRepository;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _courseCategoryRepository = provider.GetRequiredService<IcourseCategoryRepository>();
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _mapper = provider.GetRequiredService<IMapper>();
         }
         public async Task<CourseCategory> Handle(AddCourseCategoryCommand request, CancellationToken cancellationToken)
         {

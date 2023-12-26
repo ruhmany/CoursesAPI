@@ -6,6 +6,7 @@ using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.Services;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RahmanyCourses.Application.CommandHandlers.UserProfileCommandsHandlers
 {
@@ -15,12 +16,12 @@ namespace RahmanyCourses.Application.CommandHandlers.UserProfileCommandsHandlers
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UserProfileCommandsHandlers(IUserRepository repository, IPhotoService photoService, IUnitOfWork unitOfWork, IMapper mapper)
+        public UserProfileCommandsHandlers(IServiceProvider provider)
         {
-            _repository = repository;
-            _photoService = photoService;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _repository = provider.GetRequiredService<IUserRepository>();
+            _photoService = provider.GetRequiredService<IPhotoService>();
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _mapper = provider.GetRequiredService<IMapper>();
         }
 
         public async Task<UserProfileReturnModel> Handle(AddUserProfileCommand request, CancellationToken cancellationToken)

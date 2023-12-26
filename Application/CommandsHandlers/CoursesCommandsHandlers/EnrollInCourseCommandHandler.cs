@@ -5,6 +5,7 @@ using RahmanyCourses.Core.Entities;
 using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RahmanyCourses.Application.CommandsHandlers.CoursesCommandsHandlers
 {
@@ -14,11 +15,11 @@ namespace RahmanyCourses.Application.CommandsHandlers.CoursesCommandsHandlers
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public EnrollInCourseCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ICourseRepository courseRepository)
+        public EnrollInCourseCommandHandler(IServiceProvider provider)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _courseRepository = courseRepository;
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _mapper = provider.GetRequiredService<IMapper>(); ;
+            _courseRepository = provider.GetRequiredService<ICourseRepository>(); ;
         }
 
         public async Task<EnrollmentReturnModel> Handle(EnrollInCourseCommand request, CancellationToken cancellationToken)

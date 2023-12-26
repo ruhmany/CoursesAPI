@@ -1,7 +1,6 @@
 ﻿using RahmanyCourses.Application.Commands.CourseCommands;
 using RahmanyCourses.Application.Commands.UserCommands;
 using RahmanyCourses.Application.Queries.CourseQueries;
-using RahmanyCourses.Application.Queries.UserQueries;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -25,19 +24,30 @@ namespace RahmanyCourses.Persentation.Controllers
             _mapper = mapper;
         }
 
-        // Get All Courses With Its Rates.
         [HttpGet("get-all-courses")]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllCourses()
         {
-            var request = new GetCoursesQuery();
+            var request = new GetAllCoursesQuery();
             var result = await _mediator.Send(request);
             return Ok(result);
         }
 
+        // Get All Courses With Its Rates.
+        [HttpGet("get-all-enrolled-in-courses")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllEnrolledInCourses()
+        {
+
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var request = new GetEnrolledInCoursesQuery { UserId = userId};
+            var result = await _mediator.Send(request);
+            return Ok(result);
+        }
 
         [HttpGet("get-top-rated-courses")]
         [ProducesResponseType(StatusCodes.Status200OK)]        
@@ -54,7 +64,7 @@ namespace RahmanyCourses.Persentation.Controllers
         public async Task<IActionResult> GetMyCourses()
         {
             int instructorId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var request = new GetCreatedCoursesCommand { UserId = instructorId };
+            var request = new GetCreatedCoursesQuery { UserId = instructorId };
             var result = await _mediator.Send(request);
             return Ok(result);
         }
@@ -76,6 +86,8 @@ namespace RahmanyCourses.Persentation.Controllers
             var result = await _mediator.Send(request);
             return Ok(result);
         }
+
+
         [HttpPost("enroll-in-course"), Authorize]
         public async Task<IActionResult> EnrollInCourse(int courseID)
         {
@@ -101,5 +113,23 @@ namespace RahmanyCourses.Persentation.Controllers
                 return BadRequest("you aren't enrolled in this course");
             return Ok(result);
         }
+
+
+        [HttpDelete("delete-course")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> DeleteCourse(int courseId)
+        {
+            int ownerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var request = new DeleteCourseCommand { CourseID = courseId, UserID = ownerId };
+            var result = await _mediator.Send(request);
+            if (!result.IsFound)
+                return NotFound();
+            if (!result.IsUserAuthorized)
+                return Unauthorized();
+            return Ok(result);
+        }
+
     }
 }

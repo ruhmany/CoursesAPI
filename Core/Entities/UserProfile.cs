@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RahmanyCourses.Core.Entities
 {
     public class UserProfile : BaseEntity
-    {        
+    {
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

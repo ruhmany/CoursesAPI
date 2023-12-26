@@ -3,6 +3,7 @@ using RahmanyCourses.Core.Entities;
 using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RahmanyCourses.Application.CommandsHandlers.UserCommandsHandlers
 {
@@ -12,11 +13,11 @@ namespace RahmanyCourses.Application.CommandsHandlers.UserCommandsHandlers
         private readonly IRatingRepository _ratingRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RateCourseHandler(IUnitOfWork unitOfWork, IEnrollmentRepository enrollmentRepository, IRatingRepository ratingRepository)
+        public RateCourseHandler(IServiceProvider provider)
         {
-            _unitOfWork = unitOfWork;
-            _enrollmentRepository = enrollmentRepository;
-            _ratingRepository = ratingRepository;
+            _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
+            _enrollmentRepository = provider.GetRequiredService<IEnrollmentRepository>();
+            _ratingRepository = provider.GetRequiredService<IRatingRepository>();
         }
 
         public async Task<Rating> Handle(RateCourseCommand request, CancellationToken cancellationToken)
