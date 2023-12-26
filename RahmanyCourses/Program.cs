@@ -45,11 +45,12 @@ builder.Services.AddSwaggerGen(c => {
                         }
                     });
     } );
-builder.Services.AddAutoMapper(typeof(DependancyInjection).Assembly);
+builder.Services.AddAutoMapper(typeof(ApplicationDependancyInjection).Assembly);
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(DependancyInjection).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ApplicationDependancyInjection).Assembly));
 builder.Services.InjectServices();
+builder.Services.InjectApplicationValidators();
 
 
 

@@ -7,6 +7,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using RahmanyCourses.Persentation.Models;
+using FluentValidation;
+using System.Diagnostics;
+using Microsoft.Extensions.Primitives;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -16,16 +19,14 @@ namespace RahmanyCourses.Persentation.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IConfiguration _configuration;
+        private readonly IValidator<AddUserCommand> validator;
 
-        public AuthController(IMediator mediator, IMapper mapper, IConfiguration configuration)
+        public AuthController(IServiceProvider provider)
         {
-            _mediator = mediator;
-            _configuration = configuration;
+            _mediator = provider.GetRequiredService<IMediator>();
+            _configuration = provider.GetRequiredService<IConfiguration>();
+            validator = provider.GetRequiredService<IValidator<AddUserCommand>>();
         }
-
-
-
-        
 
 
         [HttpPost("register")]
@@ -34,6 +35,11 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Register(AddUserCommand command)
         {
+            var validationResult = await validator.ValidateAsync(command);
+            if (!validationResult.IsValid)
+            {                
+                return BadRequest(validationResult.Errors);
+            }
             var userResponse = await _mediator.Send(command);
             if (userResponse == null)
             {
