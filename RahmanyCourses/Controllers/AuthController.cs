@@ -19,13 +19,13 @@ namespace RahmanyCourses.Persentation.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IConfiguration _configuration;
-        private readonly IValidator<AddUserCommand> validator;
+        private readonly IValidator<AddUserCommand> addUserValidator;
 
         public AuthController(IServiceProvider provider)
         {
             _mediator = provider.GetRequiredService<IMediator>();
             _configuration = provider.GetRequiredService<IConfiguration>();
-            validator = provider.GetRequiredService<IValidator<AddUserCommand>>();
+            addUserValidator = provider.GetRequiredService<IValidator<AddUserCommand>>();
         }
 
 
@@ -35,7 +35,7 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Register(AddUserCommand command)
         {
-            var validationResult = await validator.ValidateAsync(command);
+            var validationResult = await addUserValidator.ValidateAsync(command);
             if (!validationResult.IsValid)
             {                
                 return BadRequest(validationResult.Errors);

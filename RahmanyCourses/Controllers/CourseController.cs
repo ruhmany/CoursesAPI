@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using RahmanyCourses.Persentation.Models;
 using RahmanyCourses.Persentation.DTO;
+using RahmanyCourses.Application.FilterService;
+using RahmanyCourses.Core.Entities;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -17,6 +19,7 @@ namespace RahmanyCourses.Persentation.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private readonly GenericFilter<Course> _genericFilter;
 
         public CourseController(IMediator mediator, IMapper mapper)
         {
@@ -33,6 +36,24 @@ namespace RahmanyCourses.Persentation.Controllers
             var result = await _mediator.Send(request);
             return Ok(result);
         }
+
+        [HttpGet("filtered-courses")]
+        public async Task<IActionResult> GetData([FromQuery] FilterModel<Course> filters)
+        {
+            try
+            {
+                var query = new GetFilteredCoursesQuery { Filters = filters };
+                var result = await _mediator.Send(query);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and return an error response
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
+
 
         // Get All Courses With Its Rates.
         [HttpGet("get-all-enrolled-in-courses")]

@@ -14,5 +14,6 @@ namespace RahmanyCourses.Core.Interfaces.Repositories
         Task Add(T entity);
         void Update(T entity);
         void Delete(T entity);
+        IQueryable<T> GetQueryableData();
     }
 }

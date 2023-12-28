@@ -40,5 +40,9 @@ namespace RahmanyCourses.Infrastructure.Persistance.Repositories
         {
             _context.Set<T>().Update(entity);
         }
+        public IQueryable<T> GetQueryableData()
+        {
+            return _context.Set<T>().AsQueryable();
+        }
     }
 }
