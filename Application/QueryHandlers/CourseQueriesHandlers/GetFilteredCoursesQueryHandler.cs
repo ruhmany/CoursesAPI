@@ -32,3 +32,4 @@ namespace RahmanyCourses.Application.QueryHandlers.CourseQueriesHandlers
             return Task.FromResult(result);
         }
     }
+}

@@ -1,9 +1,4 @@
 ﻿using RahmanyCourses.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RahmanyCourses.Core.Entities
 {
@@ -14,6 +9,7 @@ namespace RahmanyCourses.Core.Entities
         public ContentType Type { get; set; }
         public string URL { get; set; }
         public int OrderInCourse { get; set; }
+        public bool IsWatched { get; set; } = false;
 
         // Navigation property
         public virtual Course Course { get; set; }

@@ -15,11 +15,11 @@ namespace RahmanyCourses.Test.Controllers
         {
             //Arrange
             var mediatorFake = A.Fake<IMediator>();
-            var mapper = A.Fake<IMapper>();
+            var mapperFake = A.Fake<IMapper>();
             var fakecourses = A.CollectionOfDummy<CourseReturnModel>(5).AsEnumerable();
             A.CallTo(() => mediatorFake.Send(A<GetTopRatedCoursesQuery>._, A<CancellationToken>._))
                 .Returns(Task.FromResult(fakecourses));
-            var controller = new CourseController(mediatorFake, mapper);
+            var controller = new CourseController(mediatorFake, mapperFake);
             
             //Act
             var result = await controller.GetTopRatedCourses();

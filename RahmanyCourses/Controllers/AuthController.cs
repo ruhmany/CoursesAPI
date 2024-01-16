@@ -10,6 +10,7 @@ using RahmanyCourses.Persentation.Models;
 using FluentValidation;
 using System.Diagnostics;
 using Microsoft.Extensions.Primitives;
+using System.Runtime.CompilerServices;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -20,12 +21,14 @@ namespace RahmanyCourses.Persentation.Controllers
         private readonly IMediator _mediator;
         private readonly IConfiguration _configuration;
         private readonly IValidator<AddUserCommand> addUserValidator;
+        private readonly IValidator<GetUserTokenCommand> getUserTokenValidator;
 
         public AuthController(IServiceProvider provider)
         {
             _mediator = provider.GetRequiredService<IMediator>();
             _configuration = provider.GetRequiredService<IConfiguration>();
             addUserValidator = provider.GetRequiredService<IValidator<AddUserCommand>>();
+            getUserTokenValidator = provider.GetRequiredService<IValidator<GetUserTokenCommand>>();
         }
 
 
@@ -54,6 +57,11 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Login(GetUserTokenCommand query)
         {
+            var validationResult = await getUserTokenValidator.ValidateAsync(query);
+            if(!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
             var userResponse = await _mediator.Send(query);
             if (userResponse == null)
             {

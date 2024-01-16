@@ -1,6 +1,3 @@
-using RahmanyCourses.Core.Interfaces.Repositories;
-using RahmanyCourses.Core.Interfaces.Services;
-using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -9,9 +6,9 @@ using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 using RahmanyCourses.Application;
-using RahmanyCourses.Infrastructure.Persistance.Services;
-using RahmanyCourses.Infrastructure.Persistance.Repositories;
 using RahmanyCourses.Infrastructure.Persistance;
+using RahmanyCourses.Application.FilterService;
+using RahmanyCourses.Persentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +48,8 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ApplicationDependancyInjection).Assembly));
 builder.Services.InjectServices();
 builder.Services.InjectApplicationValidators();
+builder.Services.AddScoped(typeof(GenericFilter<>));
+builder.Services.AddTransient<GlobalExceptionHandler>();
 
 
 
@@ -106,6 +105,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionHandler>();
 
 app.MapControllers();
 
