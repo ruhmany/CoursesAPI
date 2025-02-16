@@ -1,35 +1,39 @@
 ﻿using MediatR;
 using RahmanyCourses.Application.FilterService;
+using RahmanyCourses.Application.Models;
 using RahmanyCourses.Application.Queries.CourseQueries;
 using RahmanyCourses.Core.Entities;
 using RahmanyCourses.Core.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RahmanyCourses.Application.QueryHandlers.CourseQueriesHandlers
 {
-    internal class GetFilteredCoursesQueryHandler : IRequestHandler<GetFilteredCoursesQuery, IEnumerable<Course>>
+    internal class GetFilteredCoursesQueryHandler : IRequestHandler<GetFilteredCoursesQuery, IEnumerable<CourseReturnModel>>
     {
         private readonly ICourseRepository _repository;
         private readonly GenericFilter<Course> _genericFilter;
 
         public GetFilteredCoursesQueryHandler(ICourseRepository repository, GenericFilter<Course> genericFilter)
         {
-            _repository = repository;
-            _genericFilter = genericFilter;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _genericFilter = genericFilter ?? throw new ArgumentNullException(nameof(genericFilter));
         }
 
-        public Task<IEnumerable<Course>> Handle(GetFilteredCoursesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CourseReturnModel>> Handle(GetFilteredCoursesQuery request, CancellationToken cancellationToken)
         {
             var query = _repository.GetQueryableData();
             var filteredQuery = _genericFilter.ApplyFilter(query, request.Filters);
+            var result = filteredQuery.Select(x => new CourseReturnModel
+            {
+                Title = x.Title,
+                ID = x.ID,
+                Price = x.Price,
+                Description = x.Description,
+                InstructorName = x.Instructor.Username,
+                CategoryName = x.Category.CategoryName,
+                StudentsNumber = x.Enrollments.Count
+            }).ToList();
 
-            var result = filteredQuery.AsEnumerable();
-
-            return Task.FromResult(result);
+            return result;
         }
     }
 }

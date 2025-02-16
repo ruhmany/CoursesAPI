@@ -30,11 +30,12 @@ namespace RahmanyCourses.Application.CommandHandlers.CoursesCommandsHandlers
         {
             var course = _mapper.Map<Course>(request);
             course.CreationDate = DateTime.UtcNow;
-            await _courseRepository.Add(course);
+            course = await _courseRepository.Add(course);
             _unitOfWork.CommitChanges();
             return new CourseReturnModel { Title = course.Title, Description = course.Description,
-                                            InstructorName = "asasas",
-                                             CategoryName = "asasa"}; 
+                                            InstructorName = $"{course.Instructor.UserProfile.FirstName} {course.Instructor.UserProfile.LastName}",
+                                            ID = course.ID,
+                                             CategoryName = course.Category.CategoryName}; 
         }
     }
 }

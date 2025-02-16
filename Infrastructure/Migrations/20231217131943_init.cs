@@ -12,7 +12,7 @@ namespace RahmanyCourses.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "courseCategories",
+                name: "CourseCategories",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)

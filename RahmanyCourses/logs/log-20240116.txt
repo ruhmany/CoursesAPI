@@ -1,0 +1,4 @@
+2024-01-16 18:45:48.668 +02:00 [ERR] Invalid column name 'IsWatched'.
+2024-01-16 18:52:34.549 +02:00 [ERR] Invalid column name 'IsWatched'.
+2024-01-16 19:19:49.136 +02:00 [ERR] Invalid column name 'IsWatched'.
+2024-01-16 19:20:23.900 +02:00 [ERR] Invalid column name 'IsWatched'.

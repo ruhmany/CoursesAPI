@@ -89,7 +89,7 @@ Log.Logger = new LoggerConfiguration()
             .CreateLogger();
 
 builder.Services.AddAuthorization();
-
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -105,6 +105,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors(o =>
+{
+    o.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+});
 
 app.UseMiddleware<GlobalExceptionHandler>();
 

@@ -9,9 +9,8 @@ namespace RahmanyCourses.Application
     {
         public static IServiceCollection InjectApplicationValidators(this IServiceCollection services)
         {
-            services.AddScoped<IValidator<AddUserCommand>, AddUserCommandValidation>()
+            return services.AddScoped<IValidator<AddUserCommand>, AddUserCommandValidation>()
                 .AddScoped<IValidator<GetUserTokenCommand>, GetUserTokenValidator>();
-            return services;
         }
     }
 }

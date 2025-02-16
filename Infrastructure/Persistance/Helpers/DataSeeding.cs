@@ -59,7 +59,8 @@ namespace RahmanyCourses.Infrastructure.Persistance.Helpers
                 new Enrollment { UserID = 3, CourseID = 3 },
                 new Enrollment { UserID = 3, CourseID = 4 },
                 new Enrollment { UserID = 4, CourseID = 4 },
-                new Enrollment { UserID = 4, CourseID = 2 });
+                new Enrollment { UserID = 4, CourseID = 2 }
+                );
         }
     }
 }

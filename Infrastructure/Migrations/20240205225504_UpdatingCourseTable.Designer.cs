@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RahmanyCourses.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using RahmanyCourses.Infrastructure.Persistance;
 namespace RahmanyCourses.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240205225504_UpdatingCourseTable")]
+    partial class UpdatingCourseTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,7 +190,7 @@ namespace RahmanyCourses.Infrastructure.Migrations
                         {
                             ID = 1,
                             CategoryID = 1,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3614),
+                            CreationDate = new DateTime(2024, 2, 5, 22, 55, 3, 486, DateTimeKind.Utc).AddTicks(8696),
                             Description = "Taking your from zero level to the dargon level in php within two weeks",
                             InstructorID = 5,
                             IsDeleted = false,
@@ -199,7 +202,7 @@ namespace RahmanyCourses.Infrastructure.Migrations
                         {
                             ID = 2,
                             CategoryID = 1,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3623),
+                            CreationDate = new DateTime(2024, 2, 5, 22, 55, 3, 486, DateTimeKind.Utc).AddTicks(8704),
                             Description = "Taking your from zero level to the dargon level in C# within two weeks",
                             InstructorID = 6,
                             IsDeleted = false,
@@ -211,7 +214,7 @@ namespace RahmanyCourses.Infrastructure.Migrations
                         {
                             ID = 3,
                             CategoryID = 2,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3625),
+                            CreationDate = new DateTime(2024, 2, 5, 22, 55, 3, 486, DateTimeKind.Utc).AddTicks(8706),
                             Description = "Taking your from zero level to the dargon level in php within two weeks",
                             InstructorID = 6,
                             IsDeleted = false,
@@ -223,7 +226,7 @@ namespace RahmanyCourses.Infrastructure.Migrations
                         {
                             ID = 4,
                             CategoryID = 3,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3628),
+                            CreationDate = new DateTime(2024, 2, 5, 22, 55, 3, 486, DateTimeKind.Utc).AddTicks(8709),
                             Description = "Taking your from zero level to the dargon level in full-stack web development using php within two weeks",
                             InstructorID = 5,
                             IsDeleted = false,

@@ -22,6 +22,7 @@ namespace RahmanyCourses.Infrastructure.Persistance.Configurations
             builder.Property(c => c.CategoryID);
             builder.Property(c => c.Price);
             builder.Property(c => c.CreationDate);
+            builder.Property(c => c.ThumbnailUri);
 
             builder.HasOne(c => c.Category).WithMany(cc => cc.Courses).HasForeignKey(c => c.CategoryID);
             builder.HasOne(c => c.Instructor).WithMany(u => u.Courses).HasForeignKey(c => c.InstructorID).OnDelete(DeleteBehavior.NoAction);

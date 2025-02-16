@@ -16,9 +16,10 @@ namespace RahmanyCourses.Infrastructure.Persistance.Repositories
         {
             _context = Context;
         }
-        public async Task Add(T entity)
+        public async Task<T> Add(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            var ent = await _context.Set<T>().AddAsync(entity);
+            return ent.Entity;
         }
 
         public void Delete(T entity)

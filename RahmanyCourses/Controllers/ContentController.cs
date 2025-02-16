@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using RahmanyCourses.Persentation.DTO;
+using RahmanyCourses.Application.Models;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -31,11 +32,12 @@ namespace RahmanyCourses.Persentation.Controllers
             var request = _mapper.Map<AddContentToCourseCommand>(contentDTO);
             request.CourseOwnerID = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var result = await _mediator.Send(request);
-            if(!result.IsCourseFound)
-                return NotFound();
+            var res = UnifiedResponse<ContentReturnModel>.Success(data: result);
+            if (!result.IsCourseFound)
+                res = UnifiedResponse<ContentReturnModel>.Error(message:"User Isn't Authrized To modify The Content");                
             if(!result.IsUserAuthorized)
-                return Unauthorized();
-            return Ok(result);
+                res = UnifiedResponse<ContentReturnModel>.Error(message: "User Isn't Authrized To modify The Content");
+            return Ok(res);
         }
 
 
@@ -43,16 +45,16 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> UpdateContent(UpdateContentDTO updateContentDTO)
+        public async Task<UnifiedResponse<ContentReturnModel>> UpdateContent(UpdateContentDTO updateContentDTO)
         {
             var request = _mapper.Map<UpdateContentCommand>(updateContentDTO);
             request.CourseOwnerID = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var result = await _mediator.Send(request);
             if (!result.IsCourseFound || result == null)
-                return NotFound();
+                return UnifiedResponse<ContentReturnModel>.Error(message: "Course Not Found");
             if (!result.IsUserAuthorized)
-                return Unauthorized();
-            return Ok(result);
+                return UnifiedResponse<ContentReturnModel>.Error(message: "User Isn't Authrized To modify The Content");
+            return UnifiedResponse<ContentReturnModel>.Success(data: result);
         }
 
 
@@ -60,16 +62,16 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> DeleteContent(int contentid)
+        public async Task<UnifiedResponse<DeleteContentModel>> DeleteContent(int contentid)
         {
             var request =new DeleteContentCommand { ContentId =  contentid };
             request.UserID = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var result = await _mediator.Send(request);
             if (!result.IsFound || result == null)
-                return NotFound();
+                return UnifiedResponse<DeleteContentModel>.Error(message: "Content Not Found");
             if (!result.IsAuthorized)
-                return Unauthorized();
-            return Ok(result);
+                return UnifiedResponse<DeleteContentModel>.Error(message: "User Isn't Authrized To modify The Content");
+            return  UnifiedResponse<DeleteContentModel>.Success(data: result);
         }
     }
 }

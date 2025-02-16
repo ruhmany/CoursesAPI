@@ -11,6 +11,8 @@ using FluentValidation;
 using System.Diagnostics;
 using Microsoft.Extensions.Primitives;
 using System.Runtime.CompilerServices;
+using RahmanyCourses.Persentation.DTO;
+using RahmanyCourses.Application.Models;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -36,38 +38,38 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register(AddUserCommand command)
+        public async Task<UnifiedResponse<AuthModel>> Register(AddUserCommand command)
         {
             var validationResult = await addUserValidator.ValidateAsync(command);
             if (!validationResult.IsValid)
-            {                
-                return BadRequest(validationResult.Errors);
+            {
+                return UnifiedResponse<AuthModel>.Error("Validation Error", 500);
             }
             var userResponse = await _mediator.Send(command);
             if (userResponse == null)
             {
-                return BadRequest();
+                return UnifiedResponse<AuthModel>.Error("Internal Error", 500);
             }
-            return Ok(userResponse);
+            return UnifiedResponse<AuthModel>.Success(userResponse);
         }
 
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Login(GetUserTokenCommand query)
+        public async Task<UnifiedResponse<AuthModel>> Login(GetUserTokenCommand query)
         {
             var validationResult = await getUserTokenValidator.ValidateAsync(query);
             if(!validationResult.IsValid)
             {
-                return BadRequest(validationResult.Errors);
+                return UnifiedResponse<AuthModel>.Error("Validation Error", 500);
             }
             var userResponse = await _mediator.Send(query);
             if (userResponse == null)
             {
-                return BadRequest();
+                return UnifiedResponse<AuthModel>.Error("Internal Error", 500);
             }
-            return Ok(userResponse);
+            return UnifiedResponse<AuthModel>.Success(userResponse, "Login Successfully");
         }
 
         [HttpPost("refresh")]

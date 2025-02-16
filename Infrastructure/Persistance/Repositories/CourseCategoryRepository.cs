@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RahmanyCourses.Infrastructure.Persistance.Repositories
 {
-    public class CourseCategoryRepository : BaseRepository<CourseCategory>, IcourseCategoryRepository
+    public class CourseCategoryRepository : BaseRepository<CourseCategory>, ICourseCategoryRepository
     {
         public CourseCategoryRepository(ApplicationDbContext Context) : base(Context)
         {

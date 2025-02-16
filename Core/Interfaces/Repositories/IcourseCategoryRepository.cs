@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RahmanyCourses.Core.Interfaces.Repositories
 {
-    public interface IcourseCategoryRepository : IBaseRepository<CourseCategory>
+    public interface ICourseCategoryRepository : IBaseRepository<CourseCategory>
     {
     }
 }

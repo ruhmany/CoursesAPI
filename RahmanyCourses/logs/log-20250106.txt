@@ -1,0 +1,6 @@
+2025-01-06 15:51:27.165 +02:00 [ERR] Invalid column name 'ThumbnailUri'.
+2025-01-06 15:53:18.425 +02:00 [ERR] Invalid column name 'ThumbnailUri'.
+2025-01-06 15:53:52.279 +02:00 [ERR] Invalid column name 'ThumbnailUri'.
+2025-01-06 15:54:07.471 +02:00 [ERR] Invalid column name 'ThumbnailUri'.
+2025-01-06 16:13:11.441 +02:00 [ERR] An error occurred while saving the entity changes. See the inner exception for details.
+2025-01-06 16:22:33.786 +02:00 [ERR] Value cannot be null. (Parameter 'entity')

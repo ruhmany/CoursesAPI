@@ -67,5 +67,10 @@ namespace RahmanyCourses.Infrastructure.Persistance.Repositories
             //    });
             return courses;
         }
+
+        public Task<IEnumerable<Course>> GetOwnedCourses()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

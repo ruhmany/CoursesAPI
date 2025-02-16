@@ -1,0 +1,1 @@
+2024-02-06 00:47:04.803 +02:00 [ERR] Invalid column name 'ThumbnailUri'.

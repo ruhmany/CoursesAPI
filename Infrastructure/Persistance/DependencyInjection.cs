@@ -17,15 +17,14 @@ namespace RahmanyCourses.Infrastructure.Persistance
     {
         public static IServiceCollection InjectServices(this IServiceCollection services)
         {
-            services
-                  .AddScoped<IAuthService, AuthService>()
+            return services.AddScoped<IAuthService, AuthService>()
                     .AddScoped<IPhotoService, PhotoService>()
-                  .AddScoped<IVideoService, VideoService>()
-                 .AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>))
-                   .AddScoped<IAnswerRepository, AnswerRepository>()
+                    .AddScoped<IVideoService, VideoService>()
+                    .AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>))
+                    .AddScoped<IAnswerRepository, AnswerRepository>()
                     .AddScoped<IContentRepository, ContentRepository>()
                     .AddScoped<ICourseRepository, CourseRepository>()
-                    .AddScoped<IcourseCategoryRepository, CourseCategoryRepository>()
+                    .AddScoped<ICourseCategoryRepository, CourseCategoryRepository>()
                     .AddScoped<IDiscussionRepository, DiscussionRepository>()
                     .AddScoped<IEnrollmentRepository, EnrollmentRepository>()
                     .AddScoped<INotificationsRepository, NotifcationRepository>()
@@ -37,7 +36,6 @@ namespace RahmanyCourses.Infrastructure.Persistance
                     .AddScoped<IUserProfileRepository, UserProfileRepository>()
                     .AddScoped<IUserRepository, UserRepository>()
                     .AddScoped<IUnitOfWork, UnitOfWork>();
-            return services;
         }
     }
 

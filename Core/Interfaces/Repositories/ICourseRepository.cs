@@ -11,5 +11,6 @@ namespace RahmanyCourses.Core.Interfaces.Repositories
     {
         Task<IEnumerable<Course>> GetTopRatedCourses();
         Task<IEnumerable<Course>> GetEnrolledInCourses(int userId);
+        Task<IEnumerable<Course>> GetOwnedCourses();
     }
 }

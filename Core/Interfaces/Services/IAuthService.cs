@@ -12,6 +12,7 @@ namespace RahmanyCourses.Core.Interfaces.Services
     {
         void CreateHashPassword(string password, out byte[] passwordhash, out byte[] passwordsalt);
         bool VerifyPasswordHash(string password, byte[] passwordhash, byte[] passwordsalt);
+        string DcryptPassword(string encryptedText);
         string CreateToken(User user); 
         RefreshToken CreateRefreshToken();
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RahmanyCourses.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using RahmanyCourses.Infrastructure.Persistance;
 namespace RahmanyCourses.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240128115952_addingIsWatchedToCOntentTable")]
+    partial class addingIsWatchedToCOntentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,10 +168,6 @@ namespace RahmanyCourses.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ThumbnailUri")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -187,48 +186,44 @@ namespace RahmanyCourses.Infrastructure.Migrations
                         {
                             ID = 1,
                             CategoryID = 1,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3614),
+                            CreationDate = new DateTime(2024, 1, 28, 11, 59, 51, 746, DateTimeKind.Utc).AddTicks(9503),
                             Description = "Taking your from zero level to the dargon level in php within two weeks",
                             InstructorID = 5,
                             IsDeleted = false,
                             Price = 1250m,
-                            ThumbnailUri = "",
                             Title = "PHP Fundamentals"
                         },
                         new
                         {
                             ID = 2,
                             CategoryID = 1,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3623),
+                            CreationDate = new DateTime(2024, 1, 28, 11, 59, 51, 746, DateTimeKind.Utc).AddTicks(9508),
                             Description = "Taking your from zero level to the dargon level in C# within two weeks",
                             InstructorID = 6,
                             IsDeleted = false,
                             Price = 2500m,
-                            ThumbnailUri = "",
                             Title = "C# Fundamentals"
                         },
                         new
                         {
                             ID = 3,
                             CategoryID = 2,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3625),
+                            CreationDate = new DateTime(2024, 1, 28, 11, 59, 51, 746, DateTimeKind.Utc).AddTicks(9510),
                             Description = "Taking your from zero level to the dargon level in php within two weeks",
                             InstructorID = 6,
                             IsDeleted = false,
                             Price = 1500m,
-                            ThumbnailUri = "",
                             Title = "SQL Fundamentals"
                         },
                         new
                         {
                             ID = 4,
                             CategoryID = 3,
-                            CreationDate = new DateTime(2025, 1, 6, 14, 2, 45, 398, DateTimeKind.Utc).AddTicks(3628),
+                            CreationDate = new DateTime(2024, 1, 28, 11, 59, 51, 746, DateTimeKind.Utc).AddTicks(9511),
                             Description = "Taking your from zero level to the dargon level in full-stack web development using php within two weeks",
                             InstructorID = 5,
                             IsDeleted = false,
                             Price = 1200m,
-                            ThumbnailUri = "",
                             Title = "Full-Stack Web Development Using PHO"
                         });
                 });

@@ -8,6 +8,7 @@
         public int InstructorID { get; set; }
         public int CategoryID { get; set; }
         public decimal Price { get; set; }
+        public string ThumbnailUri { get; set; } = string.Empty;
         public DateTime CreationDate { get; set; }
 
 

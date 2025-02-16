@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Security.Claims;
+using RahmanyCourses.Persentation.DTO;
+using RahmanyCourses.Core.Entities;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -29,14 +31,14 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<UnifiedResponse<IEnumerable<User>>> GetAllUsers()
         {
             var request = new GetAllUsersQuery();
             var result = await _mediator.Send(request);
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var time = DateTime.UtcNow;
-            Log.Information("User:{@userID} get the all users data at{@time}", userID, time);
-            return Ok(result);
+            Log.Information($"User:{userID} get the all users data at{time}");
+            return UnifiedResponse<IEnumerable<User>>.Success(data: result);
         }
 
         [HttpGet("get-user-by-username")]
@@ -44,12 +46,12 @@ namespace RahmanyCourses.Persentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllUsers(GetUserByUsernameQuery request)
+        public async Task<UnifiedResponse<User>> GetAllUsers(GetUserByUsernameQuery request)
         {
             var result = await _mediator.Send(request);
             if (result == null)
-                return NotFound("No user with this username");
-            return Ok(result);
+                return UnifiedResponse<User>.Error(message: "User Not Found");
+            return UnifiedResponse<User>.Success(data: result);
         }
 
 

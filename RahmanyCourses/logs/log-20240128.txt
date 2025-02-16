@@ -1,0 +1,3 @@
+2024-01-28 13:45:16.748 +02:00 [ERR] Invalid column name 'IsWatched'.
+2024-01-28 13:56:21.039 +02:00 [ERR] Invalid column name 'IsWatched'.
+2024-01-28 15:10:05.257 +02:00 [ERR] A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles. Path: $.Instructor.Courses.Enrollments.User.Enrollments.Course.Enrollments.User.Enrollments.Course.Enrollments.User.Enrollments.Course.Instructor.Courses.Category.Courses.Enrollments.User.Username.

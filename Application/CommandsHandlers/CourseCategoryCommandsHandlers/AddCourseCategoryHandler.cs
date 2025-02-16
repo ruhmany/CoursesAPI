@@ -15,12 +15,12 @@ namespace RahmanyCourses.Application.CommandHandlers.CourseCategoryCommandsHandl
 {
     internal class AddCourseCategoryHandler : IRequestHandler<AddCourseCategoryCommand, CourseCategory>
     {
-        private readonly IcourseCategoryRepository _courseCategoryRepository;
+        private readonly ICourseCategoryRepository _courseCategoryRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         public AddCourseCategoryHandler(IServiceProvider provider)
         {
-            _courseCategoryRepository = provider.GetRequiredService<IcourseCategoryRepository>();
+            _courseCategoryRepository = provider.GetRequiredService<ICourseCategoryRepository>();
             _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
             _mapper = provider.GetRequiredService<IMapper>();
         }

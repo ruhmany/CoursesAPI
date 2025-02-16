@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Azure.Core;
 using System.Security.Claims;
 using RahmanyCourses.Application.Commands.CourseCommands;
+using RahmanyCourses.Persentation.DTO;
+using RahmanyCourses.Core.Entities;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -21,10 +23,10 @@ namespace RahmanyCourses.Persentation.Controllers
         }
 
         [HttpPost("addcoursecategory"), Authorize(Roles = "Instructor")]
-        public async Task<IActionResult> AddCourseCategory([FromBody]AddCourseCategoryCommand request)
+        public async Task<UnifiedResponse<CourseCategory>> AddCourseCategory([FromBody]AddCourseCategoryCommand request)
         {
             var result = await _mediator.Send(request);
-            return Ok(result);
+            return UnifiedResponse<CourseCategory>.Success(data: result);
         }        
     }
 }

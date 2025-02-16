@@ -69,5 +69,18 @@ namespace RahmanyCourses.Infrastructure.Persistance.Services
                 return computedhash.AsSpan().SequenceEqual(passwordhash);
             }
         }
+
+
+        public string DcryptPassword(string encryptedText)
+        {
+            string decryptedText = "";
+            using (var _privateKey = RSA.Create(2048))
+            {                              
+                byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
+                byte[] decryptedBytes = _privateKey.Decrypt(encryptedBytes, RSAEncryptionPadding.Pkcs1);
+                decryptedText = Encoding.UTF8.GetString(decryptedBytes);
+            }
+            return decryptedText;
+        }
     }
 }

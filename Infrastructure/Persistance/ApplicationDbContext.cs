@@ -29,12 +29,13 @@ namespace RahmanyCourses.Infrastructure.Persistance
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<UsedCoupons> UsedCoupons { get; set; }
         public DbSet<RateReport> RateReports { get; set; }
         public DbSet<ContentReport> ContentReports { get; set; }
+
+        public  DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -11,7 +11,7 @@ namespace RahmanyCourses.Core.Interfaces.Repositories
     {
         Task<T> GetById(int id);
         Task<List<T>> GetAll();
-        Task Add(T entity);
+        Task<T> Add(T entity);
         void Update(T entity);
         void Delete(T entity);
         IQueryable<T> GetQueryableData();

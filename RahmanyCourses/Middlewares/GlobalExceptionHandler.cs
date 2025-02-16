@@ -13,7 +13,7 @@ namespace RahmanyCourses.Persentation.Middlewares
             {
                 await next(context);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Log.Error(ex.Message);
                 context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
