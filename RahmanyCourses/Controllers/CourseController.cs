@@ -39,7 +39,7 @@ namespace RahmanyCourses.Persentation.Controllers
         }
 
         [HttpPost("filtered-courses")]
-        public async Task<UnifiedResponse<IEnumerable<CourseReturnModel>> GetData(FilterModel<Course> filters)
+        public async Task<UnifiedResponse<IEnumerable<CourseReturnModel>>> GetData(FilterModel<Course> filters)
         {
             try
             {
