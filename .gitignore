@@ -10,6 +10,7 @@ obj/
 *.user
 *.userosscache
 *.sln.docstates
+.vs/
 
 # User-specific files (Mono Auto Generated)
 mono_crash.*
