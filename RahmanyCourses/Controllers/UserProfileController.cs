@@ -4,6 +4,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RahmanyCourses.Persentation.Models;
+using RahmanyCourses.Persentation.DTO;
+using RahmanyCourses.Application.Models;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -21,20 +23,20 @@ namespace RahmanyCourses.Persentation.Controllers
         }
 
         [HttpPost("add-profile"), Authorize]
-        public async Task<IActionResult> AddProfile([FromForm]AddUserProfileCommand command)
+        public async Task<UnifiedResponse<UserProfileReturnModel>> AddProfile([FromForm]AddUserProfileCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);  
+            return UnifiedResponse<UserProfileReturnModel>.Success(data: result); 
         }
 
         [HttpPut("update-profile"), Authorize]
-        public async Task<IActionResult> UpdateProfilePic(UpdateProfilePictureCommand request)
+        public async Task<UnifiedResponse<UserProfileResponse>> UpdateProfilePic(UpdateProfilePictureCommand request)
         {
             var result = await _mediator.Send(request);
             if(request == null)
-                return NotFound();
+                return UnifiedResponse<UserProfileResponse>.Error(message: "User Not Found");
             var response = _mapper.Map<UserProfileResponse>(result);
-            return Ok(response);
+            return UnifiedResponse<UserProfileResponse>.Success(data: response);
         }
     }
 }

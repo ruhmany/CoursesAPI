@@ -8,6 +8,7 @@ using Serilog;
 using System.Security.Claims;
 using RahmanyCourses.Persentation.DTO;
 using RahmanyCourses.Core.Entities;
+using RahmanyCourses.Application.Models;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -56,33 +57,30 @@ namespace RahmanyCourses.Persentation.Controllers
 
 
         [HttpPut("update-user-email")]
-        public async Task<IActionResult> UpdateUserEmail(UpdateUserEmailCommand request)
+        public async Task<UnifiedResponse<UserReturnModel>> UpdateUserEmail(UpdateUserEmailCommand request)
         {
             var result = await _mediator.Send(request);
             if(result == null)
-                return BadRequest();
-            return Ok(result);
+                return UnifiedResponse<UserReturnModel>.Error("User Not Found");
+            return UnifiedResponse<UserReturnModel>.Success(data: result);
         }
 
         [HttpPut("update-user-password")]
-        public async Task<IActionResult> UpdateUserPassword(UpdateUserPasswordCommand request)
+        public async Task<UnifiedResponse<UserReturnModel>> UpdateUserPassword(UpdateUserPasswordCommand request)
         {
             var result = await _mediator.Send(request);
             if (result == null)
-                return BadRequest();
-            return Ok(result);
+                return UnifiedResponse<UserReturnModel>.Error("User Not Found");
+            return UnifiedResponse<UserReturnModel>.Success(data: result);
         }
 
         [HttpDelete("delete-user")]
-        public async Task<IActionResult> DeleteUser(DeleteUserCommand request)
+        public async Task<UnifiedResponse<UserReturnModel>> DeleteUser(DeleteUserCommand request)
         {
             var result = await _mediator.Send(request);
             if(result == null)
-                return NotFound();
-            return Ok(result);
+                return UnifiedResponse<UserReturnModel>.Error("User Not Found");
+            return UnifiedResponse<UserReturnModel>.Success(data: result);
         }
-
-
-        
     }
 }
