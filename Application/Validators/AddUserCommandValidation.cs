@@ -14,14 +14,18 @@ namespace RahmanyCourses.Application.Validators
         {
             RuleFor(auc => auc.Username)
                 .NotEmpty()
+                .WithMessage("Username can't be empty")
                 .NotNull()
+                .WithMessage("Username can't be null")
                 .MaximumLength(80)
+                .WithMessage("length must be less than 80 char")
                 .MinimumLength(8)
-                .WithMessage("Username Mustn't Be Null Or Empty");
+                .WithMessage("Username must be more than 8 char");
             RuleFor(auc => auc.Email)
                 .NotEmpty()
+                .WithMessage("E-mail can't be empty")
                 .NotNull()
-                .WithMessage("Username Mustn't Be Null Or Empty")
+                .WithMessage("E-mail Mustn't Be Null")
                 .EmailAddress().WithMessage("Invalide Email Format");
 
             RuleFor(x => x.Password)

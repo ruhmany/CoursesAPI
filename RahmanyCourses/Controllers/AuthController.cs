@@ -13,6 +13,7 @@ using Microsoft.Extensions.Primitives;
 using System.Runtime.CompilerServices;
 using RahmanyCourses.Persentation.DTO;
 using RahmanyCourses.Application.Models;
+using RahmanyCourses.Application.Validators;
 
 namespace RahmanyCourses.Persentation.Controllers
 {
@@ -42,8 +43,9 @@ namespace RahmanyCourses.Persentation.Controllers
         {
             var validationResult = await addUserValidator.ValidateAsync(command);
             if (!validationResult.IsValid)
-            {
-                return UnifiedResponse<AuthModel>.Error("Validation Error", 500);
+            {                
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return UnifiedResponse<AuthModel>.Error("Validation Error", 500, errors);
             }
             var userResponse = await _mediator.Send(command);
             if (userResponse == null)
@@ -62,7 +64,8 @@ namespace RahmanyCourses.Persentation.Controllers
             var validationResult = await getUserTokenValidator.ValidateAsync(query);
             if(!validationResult.IsValid)
             {
-                return UnifiedResponse<AuthModel>.Error("Validation Error", 500);
+                var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+                return UnifiedResponse<AuthModel>.Error("Validation Error", 500, errors);
             }
             var userResponse = await _mediator.Send(query);
             if (userResponse == null)
