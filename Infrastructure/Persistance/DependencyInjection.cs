@@ -3,7 +3,6 @@ using RahmanyCourses.Core.Interfaces.Repositories;
 using RahmanyCourses.Core.Interfaces.Services;
 using RahmanyCourses.Core.Interfaces.UnitOfWork;
 using RahmanyCourses.Infrastructure.Persistance.Repositories;
-using RahmanyCourses.Infrastructure.Persistance.Services;
 using RahmanyCourses.Infrastructure.Persistance.UOW;
 using System;
 using System.Collections.Generic;
@@ -17,9 +16,7 @@ namespace RahmanyCourses.Infrastructure.Persistance
     {
         public static IServiceCollection InjectServices(this IServiceCollection services)
         {
-            return services.AddScoped<IAuthService, AuthService>()
-                    .AddScoped<IPhotoService, PhotoService>()
-                    .AddScoped<IVideoService, VideoService>()
+            return services
                     .AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>))
                     .AddScoped<IAnswerRepository, AnswerRepository>()
                     .AddScoped<IContentRepository, ContentRepository>()

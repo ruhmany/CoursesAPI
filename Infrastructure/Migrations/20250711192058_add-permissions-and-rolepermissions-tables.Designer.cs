@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RahmanyCourses.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using RahmanyCourses.Infrastructure.Persistance;
 namespace RahmanyCourses.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250711192058_add-permissions-and-rolepermissions-tables")]
+    partial class addpermissionsandrolepermissionstables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,6 +208,64 @@ namespace RahmanyCourses.Infrastructure.Migrations
                     b.HasIndex("InstructorID");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryID = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDate = new DateTime(2025, 7, 11, 19, 20, 57, 684, DateTimeKind.Utc).AddTicks(5114),
+                            Description = "Taking your from zero level to the dargon level in php within two weeks",
+                            InstructorID = 5,
+                            IsDeleted = false,
+                            Price = 1250m,
+                            ThumbnailUri = "",
+                            Title = "PHP Fundamentals",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryID = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDate = new DateTime(2025, 7, 11, 19, 20, 57, 684, DateTimeKind.Utc).AddTicks(5119),
+                            Description = "Taking your from zero level to the dargon level in C# within two weeks",
+                            InstructorID = 6,
+                            IsDeleted = false,
+                            Price = 2500m,
+                            ThumbnailUri = "",
+                            Title = "C# Fundamentals",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CategoryID = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDate = new DateTime(2025, 7, 11, 19, 20, 57, 684, DateTimeKind.Utc).AddTicks(5121),
+                            Description = "Taking your from zero level to the dargon level in php within two weeks",
+                            InstructorID = 6,
+                            IsDeleted = false,
+                            Price = 1500m,
+                            ThumbnailUri = "",
+                            Title = "SQL Fundamentals",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            ID = 4,
+                            CategoryID = 3,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDate = new DateTime(2025, 7, 11, 19, 20, 57, 684, DateTimeKind.Utc).AddTicks(5123),
+                            Description = "Taking your from zero level to the dargon level in full-stack web development using php within two weeks",
+                            InstructorID = 5,
+                            IsDeleted = false,
+                            Price = 1200m,
+                            ThumbnailUri = "",
+                            Title = "Full-Stack Web Development Using PHO",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("RahmanyCourses.Core.Entities.CourseCategory", b =>
@@ -232,6 +293,40 @@ namespace RahmanyCourses.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("courseCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryName = "Programming",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryName = "Database",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CategoryName = "Software Engnireeing",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            ID = 4,
+                            CategoryName = "Project Managment",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("RahmanyCourses.Core.Entities.Discussion", b =>
@@ -289,6 +384,56 @@ namespace RahmanyCourses.Infrastructure.Migrations
                     b.HasIndex("CourseID");
 
                     b.ToTable("Enrollments");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            CourseID = 1,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 1,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            CourseID = 3,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            CourseID = 2,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            CourseID = 3,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 4,
+                            CourseID = 4,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserID = 4,
+                            CourseID = 2,
+                            EnrollmentDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("RahmanyCourses.Core.Entities.Notification", b =>
@@ -311,9 +456,6 @@ namespace RahmanyCourses.Infrastructure.Migrations
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NotificationType")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
@@ -622,6 +764,32 @@ namespace RahmanyCourses.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CreatedAt = new DateTime(2025, 7, 11, 22, 20, 57, 684, DateTimeKind.Local).AddTicks(5290),
+                            IsDeleted = false,
+                            RoleName = "SuperAdmin",
+                            UpdatedAt = new DateTime(2025, 7, 11, 22, 20, 57, 684, DateTimeKind.Local).AddTicks(5367)
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CreatedAt = new DateTime(2025, 7, 11, 22, 20, 57, 684, DateTimeKind.Local).AddTicks(5370),
+                            IsDeleted = false,
+                            RoleName = "Instructor",
+                            UpdatedAt = new DateTime(2025, 7, 11, 22, 20, 57, 684, DateTimeKind.Local).AddTicks(5373)
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CreatedAt = new DateTime(2025, 7, 11, 22, 20, 57, 684, DateTimeKind.Local).AddTicks(5377),
+                            IsDeleted = false,
+                            RoleName = "Student",
+                            UpdatedAt = new DateTime(2025, 7, 11, 22, 20, 57, 684, DateTimeKind.Local).AddTicks(5387)
+                        });
                 });
 
             modelBuilder.Entity("RahmanyCourses.Core.Entities.RolePermission", b =>

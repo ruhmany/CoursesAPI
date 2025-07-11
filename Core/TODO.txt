@@ -1,0 +1,8 @@
+
+
+
+1- Change login and register behavior, with adding validation on user entered emails using an email service
+2- Add new endpoints for rest password and forget password
+3- In courses controller, add new endpoints for unrejester from courses
+4- Add new controller for Payment with new endpoints for payment processing
+5- Add new controller for Notifications with endpoints to manage user notifications

@@ -9,5 +9,6 @@ namespace RahmanyCourses.Core.Entities
     public class Permission : BaseEntity
     {
         public string RoleName { get; set; }
+        public virtual ICollection<RolePermission> RolePermissions { get; set; }
     }
 }

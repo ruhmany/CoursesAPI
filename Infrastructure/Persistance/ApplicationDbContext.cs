@@ -62,7 +62,8 @@ namespace RahmanyCourses.Infrastructure.Persistance
             modelBuilder.ApplyConfiguration<UsedCoupons>(new  UsedCouponsConfigurations());
             modelBuilder.ApplyConfiguration<ContentReport>(new ContentReportConfigurations());
             modelBuilder.ApplyConfiguration<RateReport>(new RateReportConfigurations());
-            modelBuilder.SeedData();
+            modelBuilder.ApplyConfiguration<RolePermission>(new RolePermissionConfigurations());
+            //modelBuilder.SeedData();
             base.OnModelCreating(modelBuilder);
         }
 
