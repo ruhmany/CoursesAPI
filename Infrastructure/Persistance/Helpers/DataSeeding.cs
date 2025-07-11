@@ -61,6 +61,13 @@ namespace RahmanyCourses.Infrastructure.Persistance.Helpers
                 new Enrollment { UserID = 4, CourseID = 4 },
                 new Enrollment { UserID = 4, CourseID = 2 }
                 );
+
+            builder.Entity<Role>().HasData(
+                new Role { ID = 1, CreatedAt = DateTime.Now, IsDeleted = false, RoleName = "SuperAdmin", UpdatedAt = DateTime.Now },
+                new Role { ID = 2, CreatedAt = DateTime.Now, IsDeleted = false, RoleName = "Admin", UpdatedAt = DateTime.Now },
+                new Role { ID = 3, CreatedAt = DateTime.Now, IsDeleted = false, RoleName = "Instructor", UpdatedAt = DateTime.Now },
+                new Role { ID = 4, CreatedAt = DateTime.Now, IsDeleted = false, RoleName = "Student", UpdatedAt = DateTime.Now }
+                );
         }
     }
 }

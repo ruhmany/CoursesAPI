@@ -13,6 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RahmanyCourses.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RahmanyCourses.Test", "RahmanyCourses.Test\RahmanyCourses.Test.csproj", "{24C4E918-4080-4B02-81A8-1E67869712D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44977DEB-F6BD-4D1A-9F98-614F18EB198F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7DCFB70A-3FAD-4197-A204-D4A088D3A6C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "Auth\Auth.csproj", "{45EB6348-1616-4944-8A8A-2B7CA8612A6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserService", "UserService", "{4399325D-A005-454C-A552-13E7432C522C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +50,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DCFB70A-3FAD-4197-A204-D4A088D3A6C4} = {44977DEB-F6BD-4D1A-9F98-614F18EB198F}
+		{45EB6348-1616-4944-8A8A-2B7CA8612A6D} = {7DCFB70A-3FAD-4197-A204-D4A088D3A6C4}
+		{4399325D-A005-454C-A552-13E7432C522C} = {44977DEB-F6BD-4D1A-9F98-614F18EB198F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83DB5252-2FB7-407F-9EDD-398B15282843}

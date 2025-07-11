@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RahmanyCourses.Infrastructure.Persistance.Configurations;
 using RahmanyCourses.Infrastructure.Persistance.Helpers;
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace RahmanyCourses.Infrastructure.Persistance
 {
@@ -34,7 +35,9 @@ namespace RahmanyCourses.Infrastructure.Persistance
         public DbSet<UsedCoupons> UsedCoupons { get; set; }
         public DbSet<RateReport> RateReports { get; set; }
         public DbSet<ContentReport> ContentReports { get; set; }
-
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
         public  DbSet<User> Users { get; set; }
 
 
