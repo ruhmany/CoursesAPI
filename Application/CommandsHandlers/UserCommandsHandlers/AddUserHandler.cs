@@ -41,10 +41,7 @@ namespace RahmanyCourses.Application.CommandHandlers.UserCommandsHandlers
             User.Token = "";
             User.RegistrationDate = DateTime.Now.ToLocalTime();
             var refreshtoken = _authService.CreateRefreshToken();
-            User.RefreshTokens = new List<RefreshToken>
-            {
-                refreshtoken
-            };
+            User.RefreshTokens.Add(refreshtoken);
             await _userRepository.Add(User);
             _unitOfWork.CommitChanges();
             User.Token = _authService.CreateToken(User);
