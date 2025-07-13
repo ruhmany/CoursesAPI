@@ -13,5 +13,6 @@ namespace RahmanyCourses.Core.Entities
         public int FollowingId { get; set; }
         public virtual User Follower { get; set; }
         public virtual User Following { get; set; }
+        public DateTime FollowedOn { get; set; }
     }
 }
