@@ -32,4 +32,8 @@
     <ProjectReference Include="..\Infrastructure\RahmanyCourses.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hubs\" />
+  </ItemGroup>
+
 </Project>

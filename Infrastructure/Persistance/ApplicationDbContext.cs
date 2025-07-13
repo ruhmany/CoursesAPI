@@ -39,7 +39,8 @@ namespace RahmanyCourses.Infrastructure.Persistance
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public  DbSet<User> Users { get; set; }
-
+        public DbSet<UserFollow> UserFollows { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,6 +64,7 @@ namespace RahmanyCourses.Infrastructure.Persistance
             modelBuilder.ApplyConfiguration<ContentReport>(new ContentReportConfigurations());
             modelBuilder.ApplyConfiguration<RateReport>(new RateReportConfigurations());
             modelBuilder.ApplyConfiguration<RolePermission>(new RolePermissionConfigurations());
+            modelBuilder.ApplyConfiguration<UserFollow>(new UserFollowConfigurations());
             //modelBuilder.SeedData();
             base.OnModelCreating(modelBuilder);
         }

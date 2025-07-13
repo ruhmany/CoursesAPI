@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using RahmanyCourses.Application.Commands.UserCommands;
+using RahmanyCourses.Application.Services;
 using RahmanyCourses.Application.Validators;
 using RahmanyCourses.Core.Interfaces.Services;
 using RahmanyCourses.Infrastructure.Persistance.Services;
@@ -15,6 +16,7 @@ namespace RahmanyCourses.Application
                 .AddScoped<IValidator<GetUserTokenCommand>, GetUserTokenValidator>()
                 .AddScoped<IAuthService, AuthService>()
                     .AddScoped<IPhotoService, PhotoService>()
+                    .AddScoped<INotificationService, NotificationService>()
                     .AddScoped<IVideoService, VideoService>();
         }
     }

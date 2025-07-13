@@ -8,7 +8,6 @@ namespace RahmanyCourses.Core.Interfaces.Services
 {
     public interface IMailService
     {
-        // TODO
-        // Task SendEmailAsync(string to, string subject, string body);
+        Task SendEmailAsync(string to, string subject, string body);
     }
 }

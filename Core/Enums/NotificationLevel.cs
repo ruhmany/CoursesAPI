@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RahmanyCourses.Core.Enums
 {
-    public enum NotificationType
+    public enum NotificationLevel
     {
         Message,
         Info,

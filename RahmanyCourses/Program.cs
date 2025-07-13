@@ -12,6 +12,8 @@ using RahmanyCourses.Persentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSignalR();
+
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options => 
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

@@ -30,6 +30,8 @@ namespace RahmanyCourses.Core.Entities
         public virtual ICollection<UsedCoupons> UsedCoupons { get; set; }
         public virtual ICollection<RateReport> RateReports { get; set; }
         public virtual ICollection<ContentReport> ContentReports { get; set; }
+        public virtual ICollection<UserFollow> Followers { get; set; }
+        public virtual ICollection<UserFollow> Followings { get; set; }
 
     }
 }

@@ -13,7 +13,7 @@ namespace RahmanyCourses.Core.Entities
         public string Message { get; set; }
         public DateTime Timestamp { get; set; }
         public bool IsRead { get; set; }
-        public NotificationType NotificationType { get; set; }
+        public NotificationLevel NotificationType { get; set; }
 
         // Navigation property
         public virtual User User { get; set; }
